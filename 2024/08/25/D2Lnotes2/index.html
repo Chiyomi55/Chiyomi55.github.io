@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Chiyomi">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2024/08/25/d2lnotes2/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="线性回归损失函数 在我们开始考虑如何用模型拟合（fit）数据之前，我们需要确定一个拟合程度的度量。 损失函数（loss function）能够量化目标的实际值与预测值之间的差距。 通常我们会选择非负数作为损失，且数值越小表示损失越小，完美预测时的损失为0。 回归问题中最常用的损失函数是平方误差函数。 当样本i的预测值为y^(i)，其相应的真实标签为y(i)时， 平方误差可以定义为以下公式：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D2L笔记-线性神经网络">
+<meta property="og:url" content="http://example.com/2024/08/25/D2Lnotes2/index.html">
+<meta property="og:site_name" content="Memoryβ">
+<meta property="og:description" content="线性回归损失函数 在我们开始考虑如何用模型拟合（fit）数据之前，我们需要确定一个拟合程度的度量。 损失函数（loss function）能够量化目标的实际值与预测值之间的差距。 通常我们会选择非负数作为损失，且数值越小表示损失越小，完美预测时的损失为0。 回归问题中最常用的损失函数是平方误差函数。 当样本i的预测值为y^(i)，其相应的真实标签为y(i)时， 平方误差可以定义为以下公式：">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724764080164.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724557911045.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724557972181.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724766723102.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724766569352.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724809265833.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724809325459.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724809514560.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724810999221.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724811014432.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724811029638.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724580585746.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724825059961.png">
+<meta property="og:image" content="http://example.com/2024/08/25/D2Lnotes2/1724827047626.png">
+<meta property="article:published_time" content="2024-08-25T03:17:33.000Z">
+<meta property="article:modified_time" content="2024-08-28T06:39:02.674Z">
+<meta property="article:author" content="Chiyomi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/25/D2Lnotes2/1724764080164.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/animal-print1.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/animal-print1.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/animal-print1.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            D2L笔记-线性神经网络 -
+        
+        Memoryβ
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"(⸝⸝>ᴗ(>ᴗ<⸝⸝）","subtitle":{"text":["Per aspera ad astra."],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/7/19 20:30:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Memoryβ
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Memoryβ
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">D2L笔记-线性神经网络</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/cat.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Chiyomi</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-08-25 11:17:33</span>
+        <span class="mobile">2024-08-25 11:17:33</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-08-28 14:39:02</span>
+            <span class="mobile">2024-08-28 14:39:02</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p> 在我们开始考虑如何用模型<em>拟合</em>（fit）数据之前，我们需要确定一个拟合程度的度量。 <em>损失函数</em>（loss function）能够量化目标的<em>实际</em>值与<em>预测</em>值之间的差距。 通常我们会选择非负数作为损失，且数值越小表示损失越小，完美预测时的损失为0。 回归问题中最常用的损失函数是平方误差函数。 当样本i的预测值为y^(i)，其相应的真实标签为y(i)时， <strong>平方误差</strong>可以定义为以下公式： </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724764080164.png"
+                       alt="1724764080164" style="zoom:67%;" 
+                >
+
+<p>X是训练数据，y是预测结果，w是参数，b是偏差</p>
+<p>但是，由于平方误差函数中的二次方项， 估计值y^(i)和观测值y(i)之间较大的差异将导致更大的损失。 为了度量模型在<strong>整个数据集上</strong>的质量，我们需计算在训练集n个样本上的<strong>损失均值</strong>（也等价于求和）。 </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724557911045.png"
+                       alt="1724557911045" style="zoom:67%;" 
+                >
+
+
+
+<hr>
+<p>线性回归刚好是一个简单的优化问题，它的解可以<strong>用一个公式简单表达</strong>出来， 这类解叫作解析解（analytical solution）。 首先，我们将偏置b合并到参数w中，合并方法是在包含所有参数的矩阵中附加一列。 我们的预测问题是最小化‖y−Xw‖2。 这在损失平面上只有一个临界点，这个临界点对应于整个区域的损失极小点。 将损失关于w的导数设为0，得到解析解： </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724557972181.png"
+                       alt="1724557972181" style="zoom:67%;" 
+                >
+
+<hr>
+<p><strong>总结：</strong></p>
+<ul>
+<li>线性回归是对n维输入的<strong>加权</strong>，外加<strong>偏差</strong></li>
+<li>使用<strong>平方损失</strong>来衡量预测值和真实值的差异</li>
+<li>线性回归是有<strong>显示解</strong>的！</li>
+<li>线性回归可以看作是<strong>单层神经网络</strong></li>
+</ul>
+<h3 id="基础优化算法"><a href="#基础优化算法" class="headerlink" title="基础优化算法"></a>基础优化算法</h3><p>即使在我们无法得到解析解的情况下，我们仍然可以有效地训练模型。 在许多任务上，那些难以优化的模型效果要更好。 因此，弄清楚如何训练这些难以优化的模型是非常重要的。</p>
+<p>这里我们用到一种名为<em>梯度下降</em>（gradient descent）的方法， 这种方法几乎可以优化所有深度学习模型。 它通过不断地在损失函数递减的方向上更新参数来降低误差。</p>
+<h4 id="小批量随机梯度下降"><a href="#小批量随机梯度下降" class="headerlink" title="小批量随机梯度下降"></a>小批量随机梯度下降</h4><p>梯度下降最简单的用法是<strong>计算损失函数</strong>（数据集中所有样本的损失均值） <strong>关于模型参数</strong>的<strong>导数</strong>（在这里也可以称为梯度）。 但实际中的执行可能会非常慢：因为在每一次更新参数之前，我们必须遍历整个数据集。 因此，我们通常会在每次需要计算更新的时候随机抽取一小批样本， 这种变体叫做<em><strong>小批量随机梯度下降</strong></em>（minibatch stochastic gradient descent）。 </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724766723102.png"
+                       alt="1724766723102" style="zoom:67%;" 
+                >
+
+<p><strong>近似</strong>。过程中有两个很重要超参数：批量大小和学习率。选择学习率不能太大也不能太小，太大的话就会震荡，太小的话耗费的算力大</p>
+<p>在每次迭代中，我们首先随机抽样一个小批量B， 它是由固定数量的训练样本组成的。 然后，我们计算小批量的平均损失关于模型参数的导数（也可以称为梯度）。 最后，我们<strong>将梯度乘以一个预先确定的正数η</strong>，并从当前参数的值中减掉。<br>我们用下面的数学公式来表示这一更新过程（∂表示偏导数）：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724766569352.png"
+                       alt="1724766569352" style="zoom:67%;" 
+                >
+
+<hr>
+<p> 总结一下，算法的步骤如下： </p>
+<p>（1）初始化模型参数的值，如随机初始化； </p>
+<p>（2）从数据集中随机抽取小批量样本且在负梯度的方向上更新参数，并不断迭代这一步骤。 </p>
+<p> 线性回归恰好是一个在整个域中只有一个最小值的学习问题。 但是对像深度神经网络这样复杂的模型来说，损失平面上通常包含多个最小值。 深度学习实践者很少会去花费大力气寻找这样<strong>一组参数</strong>，使得在<em>训练集</em>上的损失达到最小。 事实上，更难做到的是找到一组参数，这组参数能够在我们从未见过的数据上实现较低的损失， 这一挑战被称为<em><strong>泛化</strong></em>（generalization）。 </p>
+<hr>
+<p>Q：batchsize对模型结果的影响。</p>
+<p>A：其实通过情况下batchsize越小反而对结果收敛越好，因为小的时候在批量随机梯度下降的过程中其实噪音会比较多，但是适当的噪音在训练过程中可以让方向不会走偏。</p>
+<h3 id="softmax回归"><a href="#softmax回归" class="headerlink" title="softmax回归"></a>softmax回归</h3><p>从一个图像分类问题开始：假设每次输入是一个2×2的灰度图像。 我们可以用一个标量表示每个像素值，每个图像对应四个特征x1,x2,x3,x4。 此外，假设每个图像属于类别“猫”“鸡”和“狗”中的一个。 </p>
+<p>接下来，我们要选择如何表示标签。 我们有两个明显的选择：最直接的想法是选择y∈{1,2,3}， 其中整数分别代表狗猫鸡{狗,猫,鸡}。 这是在计算机上存储此类信息的有效方法。 如果类别间有一些自然顺序， 比如说我们试图预测婴儿儿童青少年青年人中年人老年人{婴儿,儿童,青少年,青年人,中年人,老年人}， 那么将这个问题转变为回归问题，并且保留这种格式是有意义的 </p>
+<p>但是，一般的分类问题并不与类别之间的自然顺序有关，所以单纯用数字数值来代表分类，可能会有影响。不过统计学家很早以前就发明了一种表示分类数据的简单方法：<em>独热编码</em>（one-hot encoding）。 独热编码是一个向量，它的分量和类别一样多。 类别对应的分量设置为1，其他所有分量设置为0。 在我们的例子中，标签y将是一个三维向量， 其中(1,0,0)对应于“猫”、(0,1,0)对应于“鸡”、(0,0,1)对应于“狗”： </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724809265833.png"
+                       alt="1724809265833" style="zoom:67%;" 
+                >
+
+<h4 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h4><p> 为了估计所有可能类别的条件概率，我们需要一个有多个输出的模型，每个类别对应一个输出。 为了解决线性模型的分类问题，我们需要和输出一样多的<em>仿射函数</em>（affine function）。 每个输出对应于它自己的仿射函数。 在我们的例子中，由于我们有4个特征和3个可能的输出类别， 我们将需要<strong>12个</strong>标量来表示<strong>权重</strong>（带下标的w）， <strong>3个</strong>标量来表示<strong>偏置</strong>（带下标的b）。 下面我们为每个输入计算三个<em>未规范化的预测</em>（logit）：o1、o2和o3。 </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724809325459.png"
+                       alt="1724809325459" style="zoom:67%;" 
+                >
+
+<p>  与线性回归一样，<strong>softmax回归</strong>也是一个<strong>单层神经网络</strong>。 由于计算每个输出o1、o2和o3取决于 所有输入x1、x2、x3和x4， 所以softmax回归的输出层也是全连接层。 </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724809514560.png"
+                       alt="1724809514560" style="zoom:67%;" 
+                >
+
+<p>全连接层是“完全”连接的， 具体来说，对于任何具有d个输入和q个输出的全连接层， 参数**开销为O(dq)<strong>，这个数字在实践中可能高得令人望而却步。 幸运的是，将d个输入转换为q个输出的成本可以</strong>减少到O(dq&#x2F;n)**， 其中超参数n可以由我们灵活指定，以在实际应用中平衡参数节约和模型有效性 。</p>
+<p>要将输出视为概率，我们必须保证在任何数据上的输出都是<strong>非负</strong>的且<strong>总和为1</strong>。 此外，我们需要一个训练的目标函数，来激励模型精准地估计概率。 例如， 在分类器输出0.5的所有样本中，我们希望这些样本是刚好有一半实际上属于预测的类别。 这个属性叫做<em>校准</em>（calibration）。 </p>
+<h4 id="损失函数-1"><a href="#损失函数-1" class="headerlink" title="损失函数"></a>损失函数</h4><p>softmax函数给出了一个向量y^， 我们可以将其视为“对给定任意输入x的每个类的条件概率”。 例如，y^1&#x3D;猫P(y&#x3D;猫∣x)。 假设整个数据集{X,Y}具有n个样本， 其中索引i的样本由特征向量x(i)和独热标签向量y(i)组成。 我们可以将估计值与实际值进行比较：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724810999221.png"
+                       alt="1724810999221" style="zoom:67%;" 
+                >
+
+<p>根据最大似然估计，我们最大化P(Y∣X)，相当于最小化负对数似然：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724811014432.png"
+                       alt="1724811014432" style="zoom:67%;" 
+                >
+
+<p>(3.4.7)−log⁡P(Y∣X)&#x3D;∑i&#x3D;1n−log⁡P(y(i)∣x(i))&#x3D;∑i&#x3D;1nl(y(i),y^(i)),</p>
+<p>其中，对于任何标签y和模型预测y^，损失函数为：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724811029638.png"
+                       alt="1724811029638" style="zoom:67%;" 
+                >
+
+<p>上面这个损失函数 通常被称为<em><strong>交叉熵损失</strong></em>（cross-entropy loss）。 由于y是一个长度为q的独热编码向量， 所以除了一个项以外的所有项j都消失了。 由于所有y^j都是预测的概率，所以它们的对数永远不会大于0。 因此，如果正确地预测实际标签，即如果实际标签P(y∣x)&#x3D;1， 则损失函数不能进一步最小化。 注意，这往往是不可能的。 例如，数据集中可能存在标签噪声（比如某些样本可能被误标）， 或输入特征没有足够的信息来完美地对每一个样本分类。 </p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724580585746.png"
+                       alt="1724580585746" style="zoom:67%;" 
+                >
+
+<p>如果把熵H(P)想象为“知道真实概率的人所经历的惊异程度”，那么什么是交叉熵？ 交叉熵<em>从</em>P<em>到</em>Q，记为H(P,Q)。 我们可以把交叉熵想象为“主观概率为Q的观察者在看到根据概率P生成的数据时的预期惊异”。 当P&#x3D;Q时，交叉熵达到最低。 在这种情况下，从P到Q的交叉熵是H(P,P)&#x3D;H(P)。</p>
+<p>简而言之，我们可以从两方面来考虑交叉熵分类目标： </p>
+<p>（i）最大化观测数据的似然；<br>（ii）最小化传达标签所需的惊异</p>
+<h3 id="代码实现softmax回归"><a href="#代码实现softmax回归" class="headerlink" title="代码实现softmax回归"></a>代码实现softmax回归</h3><p>以 Fashion-MNIST数据集为例，进行图像分类。</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> IPython <span class="keyword">import</span> display</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line"><span class="comment">#引入数据集，并设置数据迭代器大小为256</span></span><br><span class="line">batch_size = <span class="number">256</span> </span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br></pre></td></tr></table></figure></div>
+
+<p>原始数据集中的每个样本都是<strong>28×28</strong>的图像。 本节将展平每个图像，把它们看作<strong>长度为784的向量</strong>。 在后面我们将讨论能够利用图像空间结构的特征， 但现在我们暂时只把每个像素位置看作一个特征。<br>softmax回归中，我们的输出与类别一样多。 因为我们的数据集有<strong>10个类别</strong>，所以网络输出维度为10。 因此，<strong>权重将构成一个784×10的矩阵</strong>， <strong>偏置将构成一个1×10的行向量</strong>。 与线性回归一样，我们将使用正态分布初始化我们的权重<code>W</code>，偏置初始化为0。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初始化模型参数</span></span><br><span class="line">num_inputs = <span class="number">784</span></span><br><span class="line">num_outputs = <span class="number">10</span></span><br><span class="line"><span class="comment">#将每个样本都用固定长度的向量表示</span></span><br><span class="line">W = torch.normal(<span class="number">0</span>, <span class="number">0.01</span>, size=(num_inputs, num_outputs), requires_grad=<span class="literal">True</span>)</span><br><span class="line">b = torch.zeros(num_outputs, requires_grad=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>回想一下，实现softmax由三个步骤组成：</p>
+<ol>
+<li>对每个项求幂（使用<code>exp</code>）；</li>
+<li>对每一行求和（小批量中每个样本是一行），得到每个样本的规范化常数；</li>
+<li>将每一行除以其规范化常数，确保结果的和为1。</li>
+</ol>
+<p>在查看代码之前，我们回顾一下这个表达式：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724825059961.png"
+                       alt="1724825059961" style="zoom:67%;" 
+                >
+
+<hr>
+<h4 id="定义softmax操作"><a href="#定义softmax操作" class="headerlink" title="定义softmax操作"></a><strong>定义softmax操作</strong></h4><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">softmax</span>(<span class="params">X</span>):</span><br><span class="line">    X_exp = torch.exp(X)</span><br><span class="line">    partition = X_exp.<span class="built_in">sum</span>(<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> X_exp / partition  <span class="comment"># 这里应用了广播机制</span></span><br></pre></td></tr></table></figure></div>
+
+<p>对于任何随机输入，我们将每个元素变成一个非负数。 此外，依据概率原理，每行总和为1。 </p>
+<hr>
+<h4 id="定义损失函数"><a href="#定义损失函数" class="headerlink" title="定义损失函数"></a><strong>定义损失函数</strong></h4><p>之前提到的<strong>交叉熵</strong>采用真实标签的预测概率的<strong>负对数似然</strong>。 这里我们不使用Python的for循环迭代预测（这往往是低效的）， 而是通过一个运算符选择所有元素。 下面，我们创建一个数据样本<code>y_hat</code>，其中包含2个样本在3个类别的预测概率， 以及它们对应的标签<code>y</code>。 有了<code>y</code>，我们知道在第一个样本中，第一类是正确的预测； 而在第二个样本中，第三类是正确的预测。 然后使用<code>y</code>作为<code>y_hat</code>中概率的索引， 我们选择第一个样本中第一个类的概率和第二个样本中第三个类的概率。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">y = torch.tensor([<span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line">y_hat = torch.tensor([[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.6</span>], [<span class="number">0.3</span>, <span class="number">0.2</span>, <span class="number">0.5</span>]])</span><br><span class="line">y_hat[[<span class="number">0</span>, <span class="number">1</span>], y]</span><br><span class="line"></span><br><span class="line"><span class="comment">#这样，我们现在只需要一行代码就可以实现交叉熵损失函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy</span>(<span class="params">y_hat, y</span>):</span><br><span class="line">    <span class="keyword">return</span> - torch.log(y_hat[<span class="built_in">range</span>(<span class="built_in">len</span>(y_hat)), y])</span><br><span class="line"></span><br><span class="line">cross_entropy(y_hat, y)</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h4 id="计算分类精度"><a href="#计算分类精度" class="headerlink" title="计算分类精度"></a><strong>计算分类精度</strong></h4><p>给定预测概率分布<code>y_hat</code>，当我们必须输出硬预测（hard prediction）时， 我们通常选择预测概率最高的类。 许多应用都要求我们做出选择。如Gmail必须将电子邮件分类为“Primary（主要邮件）”、 “Social（社交邮件）”“Updates（更新邮件）”或“Forums（论坛邮件）”。 Gmail做分类时可能在内部估计概率，但最终它必须在类中选择一个。</p>
+<p>当预测与标签分类<code>y</code>一致时，即是正确的。 分类精度即正确预测数量与总预测数量之比。 虽然直接优化精度可能很困难（因为精度的计算不可导）， 但精度通常是我们最关心的性能衡量标准，我们在训练分类器时几乎总会关注它。</p>
+<p>为了计算精度，我们执行以下操作。 首先，如果<code>y_hat</code>是矩阵，那么假定第二个维度存储每个类的预测分数。 我们使用<code>argmax</code>获得每行中最大元素的索引来获得预测类别。 然后我们将预测类别与真实<code>y</code>元素进行比较。 由于等式运算符“<code>==</code>”对数据类型很敏感， 因此我们将<code>y_hat</code>的数据类型转换为与<code>y</code>的数据类型一致。 结果是一个包含0（错）和1（对）的张量。 最后，我们求和会得到正确预测的数量。</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">accuracy</span>(<span class="params">y_hat, y</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算预测正确的数量&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(y_hat.shape) &gt; <span class="number">1</span> <span class="keyword">and</span> y_hat.shape[<span class="number">1</span>] &gt; <span class="number">1</span>:</span><br><span class="line">        y_hat = y_hat.argmax(axis=<span class="number">1</span>)</span><br><span class="line">    cmp = y_hat.<span class="built_in">type</span>(y.dtype) == y</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(cmp.<span class="built_in">type</span>(y.dtype).<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure></div>
+
+<p> 我们将继续使用之前定义的变量<code>y_hat</code>和<code>y</code>分别作为预测的概率分布和标签。 可以看到，第一个样本的预测类别是2（该行的最大元素为0.6，索引为2），这与实际标签0不一致。 第二个样本的预测类别是2（该行的最大元素为0.5，索引为2），这与实际标签2一致。 因此，这两个样本的分类精度率为0.5。 </p>
+<hr>
+<p>同样地， 对于任意数据迭代器<code>data_iter</code>可访问的数据集， 我们可以评估在任意模型<code>net</code>的精度。 </p>
+<p> 这里定义一个实用程序类<code>Accumulator</code>，用于对多个变量进行累加。 在上面的<code>evaluate_accuracy</code>函数中， 我们在<code>Accumulator</code>实例中创建了2个变量， 分别用于存储正确预测的数量和预测的总数量。 当我们遍历数据集时，两者都将随着时间的推移而累加。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate_accuracy</span>(<span class="params">net, data_iter</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算在指定数据集上模型的精度&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(net, torch.nn.Module):</span><br><span class="line">        net.<span class="built_in">eval</span>()  <span class="comment"># 将模型设置为评估模式</span></span><br><span class="line">    metric = Accumulator(<span class="number">2</span>)  <span class="comment"># 正确预测数、预测总数</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter:</span><br><span class="line">            metric.add(accuracy(net(X), y), y.numel())</span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Accumulator</span>:  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;在n个变量上累加&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * n</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, *args</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [a + <span class="built_in">float</span>(b) <span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="variable language_">self</span>.data, args)]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * <span class="built_in">len</span>(<span class="variable language_">self</span>.data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.data[idx]</span><br><span class="line">    </span><br><span class="line">evaluate_accuracy(net, test_iter)</span><br><span class="line"><span class="comment">#得到的结果是0.0625</span></span><br></pre></td></tr></table></figure></div>
+
+<p> 由于我们使用随机权重初始化<code>net</code>模型， 因此该模型的精度应接近于随机猜测。 例如在有10个类别情况下的精度为0.1。 </p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>  首先，我们定义一个函数来训练一个迭代周期。 请注意，<code>updater</code>是更新模型参数的常用函数，它接受批量大小作为参数。 它可以是<code>d2l.sgd</code>函数，也可以是框架的内置优化函数。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_epoch_ch3</span>(<span class="params">net, train_iter, loss, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型一个迭代周期（定义见第3章）&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 将模型设置为训练模式</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(net, torch.nn.Module):</span><br><span class="line">        net.train()</span><br><span class="line">    <span class="comment"># 训练损失总和、训练准确度总和、样本数</span></span><br><span class="line">    metric = Accumulator(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> train_iter:</span><br><span class="line">        <span class="comment"># 计算梯度并更新参数</span></span><br><span class="line">        y_hat = net(X)</span><br><span class="line">        l = loss(y_hat, y)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(updater, torch.optim.Optimizer):</span><br><span class="line">            <span class="comment"># 使用PyTorch内置的优化器和损失函数</span></span><br><span class="line">            updater.zero_grad()</span><br><span class="line">            l.mean().backward()</span><br><span class="line">            updater.step()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 使用定制的优化器和损失函数</span></span><br><span class="line">            l.<span class="built_in">sum</span>().backward()</span><br><span class="line">            updater(X.shape[<span class="number">0</span>])</span><br><span class="line">        metric.add(<span class="built_in">float</span>(l.<span class="built_in">sum</span>()), accuracy(y_hat, y), y.numel())</span><br><span class="line">    <span class="comment"># 返回训练损失和训练精度</span></span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">2</span>], metric[<span class="number">1</span>] / metric[<span class="number">2</span>]</span><br></pre></td></tr></table></figure></div>
+
+<p> 在展示训练函数的实现之前，我们定义一个在动画中绘制数据的实用程序类<code>Animator</code>， 它能够简化本书其余部分的代码。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animator</span>:  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;在动画中绘制数据&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, xlabel=<span class="literal">None</span>, ylabel=<span class="literal">None</span>, legend=<span class="literal">None</span>, xlim=<span class="literal">None</span>,</span></span><br><span class="line"><span class="params">                 ylim=<span class="literal">None</span>, xscale=<span class="string">&#x27;linear&#x27;</span>, yscale=<span class="string">&#x27;linear&#x27;</span>,</span></span><br><span class="line"><span class="params">                 fmts=(<span class="params"><span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;m--&#x27;</span>, <span class="string">&#x27;g-.&#x27;</span>, <span class="string">&#x27;r:&#x27;</span></span>), nrows=<span class="number">1</span>, ncols=<span class="number">1</span>,</span></span><br><span class="line"><span class="params">                 figsize=(<span class="params"><span class="number">3.5</span>, <span class="number">2.5</span></span>)</span>):</span><br><span class="line">        <span class="comment"># 增量地绘制多条线</span></span><br><span class="line">        <span class="keyword">if</span> legend <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            legend = []</span><br><span class="line">        d2l.use_svg_display()</span><br><span class="line">        <span class="variable language_">self</span>.fig, <span class="variable language_">self</span>.axes = d2l.plt.subplots(nrows, ncols, figsize=figsize)</span><br><span class="line">        <span class="keyword">if</span> nrows * ncols == <span class="number">1</span>:</span><br><span class="line">            <span class="variable language_">self</span>.axes = [<span class="variable language_">self</span>.axes, ]</span><br><span class="line">        <span class="comment"># 使用lambda函数捕获参数</span></span><br><span class="line">        <span class="variable language_">self</span>.config_axes = <span class="keyword">lambda</span>: d2l.set_axes(</span><br><span class="line">            <span class="variable language_">self</span>.axes[<span class="number">0</span>], xlabel, ylabel, xlim, ylim, xscale, yscale, legend)</span><br><span class="line">        <span class="variable language_">self</span>.X, <span class="variable language_">self</span>.Y, <span class="variable language_">self</span>.fmts = <span class="literal">None</span>, <span class="literal">None</span>, fmts</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        <span class="comment"># 向图表中添加多个数据点</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(y, <span class="string">&quot;__len__&quot;</span>):</span><br><span class="line">            y = [y]</span><br><span class="line">        n = <span class="built_in">len</span>(y)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">hasattr</span>(x, <span class="string">&quot;__len__&quot;</span>):</span><br><span class="line">            x = [x] * n</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.X:</span><br><span class="line">            <span class="variable language_">self</span>.X = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable language_">self</span>.Y:</span><br><span class="line">            <span class="variable language_">self</span>.Y = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        <span class="keyword">for</span> i, (a, b) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(x, y)):</span><br><span class="line">            <span class="keyword">if</span> a <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> b <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="variable language_">self</span>.X[i].append(a)</span><br><span class="line">                <span class="variable language_">self</span>.Y[i].append(b)</span><br><span class="line">        <span class="variable language_">self</span>.axes[<span class="number">0</span>].cla()</span><br><span class="line">        <span class="keyword">for</span> x, y, fmt <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="variable language_">self</span>.X, <span class="variable language_">self</span>.Y, <span class="variable language_">self</span>.fmts):</span><br><span class="line">            <span class="variable language_">self</span>.axes[<span class="number">0</span>].plot(x, y, fmt)</span><br><span class="line">        <span class="variable language_">self</span>.config_axes()</span><br><span class="line">        display.display(<span class="variable language_">self</span>.fig)</span><br><span class="line">        display.clear_output(wait=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p> 接下来我们实现一个训练函数， 它会在<code>train_iter</code>访问到的训练数据集上训练一个模型<code>net</code>。 该训练函数将会运行多个迭代周期（由<code>num_epochs</code>指定）。 在每个迭代周期结束时，利用<code>test_iter</code>访问到的测试数据集对模型进行评估。 我们将利用<code>Animator</code>类来可视化训练进度。 </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_ch3</span>(<span class="params">net, train_iter, test_iter, loss, num_epochs, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型（定义见第3章）&quot;&quot;&quot;</span></span><br><span class="line">    animator = Animator(xlabel=<span class="string">&#x27;epoch&#x27;</span>, xlim=[<span class="number">1</span>, num_epochs], ylim=[<span class="number">0.3</span>, <span class="number">0.9</span>],</span><br><span class="line">                        legend=[<span class="string">&#x27;train loss&#x27;</span>, <span class="string">&#x27;train acc&#x27;</span>, <span class="string">&#x27;test acc&#x27;</span>])</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        train_metrics = train_epoch_ch3(net, train_iter, loss, updater)</span><br><span class="line">        test_acc = evaluate_accuracy(net, test_iter)</span><br><span class="line">        animator.add(epoch + <span class="number">1</span>, train_metrics + (test_acc,))</span><br><span class="line">    train_loss, train_acc = train_metrics</span><br><span class="line">    <span class="keyword">assert</span> train_loss &lt; <span class="number">0.5</span>, train_loss</span><br><span class="line">    <span class="keyword">assert</span> train_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> train_acc &gt; <span class="number">0.7</span>, train_acc</span><br><span class="line">    <span class="keyword">assert</span> test_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> test_acc &gt; <span class="number">0.7</span>, test_acc</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用小批量随机梯度下降来优化模型的损失函数</span></span><br><span class="line">lr = <span class="number">0.1</span>   <span class="comment">#设置学习率为0.1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">updater</span>(<span class="params">batch_size</span>):</span><br><span class="line">    <span class="keyword">return</span> d2l.sgd([W, b], lr, batch_size)</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练模型10个迭代周期</span></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs, updater)</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><p> 训练已经完成，我们的模型已经准备好对图像进行分类预测。 给定一系列图像，我们将比较它们的实际标签（文本输出的第一行）和模型预测（文本输出的第二行） </p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict_ch3</span>(<span class="params">net, test_iter, n=<span class="number">6</span></span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;预测标签（定义见第3章）&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> test_iter:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    trues = d2l.get_fashion_mnist_labels(y)</span><br><span class="line">    preds = d2l.get_fashion_mnist_labels(net(X).argmax(axis=<span class="number">1</span>))</span><br><span class="line">    titles = [true +<span class="string">&#x27;\n&#x27;</span> + pred <span class="keyword">for</span> true, pred <span class="keyword">in</span> <span class="built_in">zip</span>(trues, preds)]</span><br><span class="line">    d2l.show_images(</span><br><span class="line">        X[<span class="number">0</span>:n].reshape((n, <span class="number">28</span>, <span class="number">28</span>)), <span class="number">1</span>, n, titles=titles[<span class="number">0</span>:n])</span><br><span class="line"></span><br><span class="line">predict_ch3(net, test_iter)</span><br></pre></td></tr></table></figure></div>
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/08/25/D2Lnotes2/1724827047626.png"
+                       alt="1724827047626" style="zoom:67%;" 
+                >
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li><p>训练softmax回归循环模型与训练线性回归模型非常相似：先读取数据，再定义模型和损失函数，然后使用优化算法训练模型。大多数常见的深度学习模型都有类似的训练过程。</p>
+</li>
+<li><p>借助softmax回归，我们可以训练多分类的模型。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> D2L笔记-线性神经网络</li>
+        <li><strong>Author:</strong> Chiyomi</li>
+        <li><strong>Created at
+                :</strong> 2024-08-25 11:17:33</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2024-08-28 14:39:02
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2024/08/25/D2Lnotes2/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/08/25/D2Lnotes1/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">D2L笔记-微积分部分</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">D2L笔记-线性神经网络</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-text">基础优化算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#softmax%E5%9B%9E%E5%BD%92"><span class="nav-text">softmax回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0softmax%E5%9B%9E%E5%BD%92"><span class="nav-text">代码实现softmax回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B"><span class="nav-text">预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-text">小结</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Chiyomi</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        3 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

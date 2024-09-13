@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://example.com/2024/09/13/KT-summarize2024/1726222026831.png">
 <meta property="og:image" content="http://example.com/2024/09/13/KT-summarize2024/1726224024925.png">
 <meta property="article:published_time" content="2024-09-13T12:57:31.000Z">
-<meta property="article:modified_time" content="2024-09-13T12:58:52.465Z">
+<meta property="article:modified_time" content="2024-09-13T13:04:15.079Z">
 <meta property="article:author" content="Chiyomi">
 <meta property="article:tag" content="readingnotes">
 <meta name="twitter:card" content="summary">
@@ -437,8 +437,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-09-13 20:58:52</span>
-            <span class="mobile">2024-09-13 20:58:52</span>
+            <span class="desktop">2024-09-13 21:04:15</span>
+            <span class="mobile">2024-09-13 21:04:15</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -476,10 +476,10 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <h2 id="KT-Overview"><a href="#KT-Overview" class="headerlink" title="KT-Overview"></a>KT-Overview</h2><p>考虑到在线学习系统中的学习互动序列，KT旨在监测学生在学习过程中不断发展的知识状态，并预测他们在未来练习中的表现。测量的知识状态可以进一步应用于学生的个性化学习方案，以最大限度地提高他们的学习效率。</p>
+            <h1 id="KT-Overview"><a href="#KT-Overview" class="headerlink" title="KT-Overview"></a>KT-Overview</h1><p>考虑到在线学习系统中的学习互动序列，KT旨在监测学生在学习过程中不断发展的知识状态，并预测他们在未来练习中的表现。测量的知识状态可以进一步应用于学生的个性化学习方案，以最大限度地提高他们的学习效率。</p>
 <p>最近的一些工作直接将KT任务视为学生的成绩预测，而没有考虑学生的知识状态。我们同意，预测学生的表现是非常重要的，因为它现在是评估KT模型所追踪的知识状态质量的最佳方式。然而，我们必须指出，KT更注重学生的知识状态，特别是他们的可解释性和理性，这与学生对基于KT的给定结论的接受程度有关。</p>
-<h2 id="三类基本KT模型"><a href="#三类基本KT模型" class="headerlink" title="三类基本KT模型"></a>三类基本KT模型</h2><h3 id="贝叶斯模型"><a href="#贝叶斯模型" class="headerlink" title="贝叶斯模型"></a>贝叶斯模型</h3><p>贝叶斯模型假定学习过程遵守马尔可夫过程。<br>这个过程允许根据学生观察到的表现来估计他们的潜在知识状态。</p>
-<h4 id="BKT"><a href="#BKT" class="headerlink" title="BKT"></a>BKT</h4><img  
+<h1 id="三类基本KT模型"><a href="#三类基本KT模型" class="headerlink" title="三类基本KT模型"></a>三类基本KT模型</h1><h2 id="贝叶斯模型"><a href="#贝叶斯模型" class="headerlink" title="贝叶斯模型"></a>贝叶斯模型</h2><p>贝叶斯模型假定学习过程遵守马尔可夫过程。<br>这个过程允许根据学生观察到的表现来估计他们的潜在知识状态。</p>
+<h3 id="BKT"><a href="#BKT" class="headerlink" title="BKT"></a>BKT</h3><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/2024/09/13/KT-summarize2024/1726207767941.png"
@@ -512,7 +512,7 @@
                       class="" width="1726214858091"
                 >
 
-<h4 id="DBKT"><a href="#DBKT" class="headerlink" title="DBKT"></a>DBKT</h4><p>动态BKT独立地对每个KC的参数进行建模，为每个KC采用一个特定的模型</p>
+<h3 id="DBKT"><a href="#DBKT" class="headerlink" title="DBKT"></a>DBKT</h3><p>动态BKT独立地对每个KC的参数进行建模，为每个KC采用一个特定的模型</p>
 <p>然而，KCs并不是完全独立的，而是分层的和密切相关的。DBKT用动态贝叶斯网络来表示KC内部的层次和关系。这种方法在一个单一的模型中共同考虑不同的KC。在DBKT中，学生的知识掌握由二元潜变量表示，这些潜变量是根据他们的学习互动来估计的。与BKT不同，DBKT考虑到了各种<strong>KC之间的依赖关系</strong>。例如，如果KC 1和KC 2是掌握KC 3的<strong>先决条件</strong>，学生对KC 3的掌握取决于他们对KC 1和KC 2的掌握。让H表示未观察到的变量，即缺乏学生的答案和二元掌握的变量。假设学生在时间步骤t 1正确回答了与KC 1相关的练习，即a 1,1 &#x3D;1。那么，<strong>观察到的</strong>变量是a m &#x3D; a 1,1，而<strong>未观察到的变量</strong>是h m &#x3D; {KC 1,1, KC 2,1, KC 3,1,a 2,1,a 3,1}。DBKT的目标是<strong>找到使联合概率p(a m,h m|θ)最大化的参数θ</strong>。对数似然也可以用对数线性模型来表述：</p>
 <img  
                      lazyload
@@ -521,8 +521,8 @@
                       class="" width="1726215659095"
                 >
 
-<h3 id="Logistic模型"><a href="#Logistic模型" class="headerlink" title="Logistic模型"></a>Logistic模型</h3><p>Logistic模型表示学生正确回答练习的概率，是学生和KC参数的Logistic函数。他们首先在学生的学习互动中使用不同的因素来计算学生和KC参数的估计值，然后利用逻辑函数将这种估计值转化为对掌握概率的预测。在随后的章节中，我们将介绍以下三种类型的逻辑模型。1）LFA；2）PFA；3）知识追踪机（KTM）。</p>
-<h4 id="LFA模型"><a href="#LFA模型" class="headerlink" title="LFA模型"></a><strong>LFA模型</strong></h4><p>考虑了以下学习因素：<br>1）初始知识状态。参数α估计每个学生的初始知识状态。<br>2）KCs的简易性。参数β反映了不同KCs的简易性。<br>3）KCs的学习率。参数γ表示KCs的学习率。</p>
+<h2 id="Logistic模型"><a href="#Logistic模型" class="headerlink" title="Logistic模型"></a>Logistic模型</h2><p>Logistic模型表示学生正确回答练习的概率，是学生和KC参数的Logistic函数。他们首先在学生的学习互动中使用不同的因素来计算学生和KC参数的估计值，然后利用逻辑函数将这种估计值转化为对掌握概率的预测。在随后的章节中，我们将介绍以下三种类型的逻辑模型。1）LFA；2）PFA；3）知识追踪机（KTM）。</p>
+<h3 id="LFA模型"><a href="#LFA模型" class="headerlink" title="LFA模型"></a><strong>LFA模型</strong></h3><p>考虑了以下学习因素：<br>1）初始知识状态。参数α估计每个学生的初始知识状态。<br>2）KCs的简易性。参数β反映了不同KCs的简易性。<br>3）KCs的学习率。参数γ表示KCs的学习率。</p>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -530,7 +530,7 @@
                       class="" width="1726216644756"
                 >
 
-<h4 id="PFA模型"><a href="#PFA模型" class="headerlink" title="PFA模型"></a>PFA模型</h4><p>可以被看作是LFA模型的扩展，对学生的表现特别敏感。与LFA模型相比，PFA考虑了以下不同的因素：</p>
+<h3 id="PFA模型"><a href="#PFA模型" class="headerlink" title="PFA模型"></a>PFA模型</h3><p>可以被看作是LFA模型的扩展，对学生的表现特别敏感。与LFA模型相比，PFA考虑了以下不同的因素：</p>
 <p>1）以前的失败。参数f是学生的KC的先前失败。<br>2）以前的成功。参数s代表学生的KC的先前成功。<br>3）KCs的简易性。参数β意味着不同KCs的简易性，这与LFA模型中的情况相同。</p>
 <p>标准的PFA模型采取以下形式：</p>
 <img  
@@ -541,7 +541,7 @@
                 >
 
 <p>其中μ和ν是s和f的系数，分别表示成功和失败的学习率。</p>
-<h4 id="KT机"><a href="#KT机" class="headerlink" title="KT机"></a>KT机</h4><p>KTM模型采用了因子化机（FMs），将Logistic模型推广到更高维度。调频最初是作为一个通用的预测器被引入的，能够处理任何实值的特征向量，使模型能够使用因子化参数表示变量之间的所有相互作用。调频器提供了一种将有关练习或学生的侧面信息编码到模型中的方法。下图说明了KTM的例子。</p>
+<h3 id="KT机"><a href="#KT机" class="headerlink" title="KT机"></a>KT机</h3><p>KTM模型采用了因子化机（FMs），将Logistic模型推广到更高维度。调频最初是作为一个通用的预测器被引入的，能够处理任何实值的特征向量，使模型能够使用因子化参数表示变量之间的所有相互作用。调频器提供了一种将有关练习或学生的侧面信息编码到模型中的方法。下图说明了KTM的例子。</p>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -557,9 +557,9 @@
                       class="" width="1726216967677"
                 >
 
-<h3 id="深度学习模型"><a href="#深度学习模型" class="headerlink" title="深度学习模型"></a>深度学习模型</h3><p>认知过程可以受到宏观和微观层面各种因素的影响，因此贝叶斯模型或逻辑模型很难充分捕捉到高复杂度的认知过程。而深度学习具有实现非线性和特征提取的强大能力，很适合对复杂的学习过程进行建模，特别是当有大量的学习交互数据可用时。近年来，许多关于深度学习KT模型的研究工作已经被提出，我们将从以下四个子类别引入深度学习模型。</p>
+<h2 id="深度学习模型"><a href="#深度学习模型" class="headerlink" title="深度学习模型"></a>深度学习模型</h2><p>认知过程可以受到宏观和微观层面各种因素的影响，因此贝叶斯模型或逻辑模型很难充分捕捉到高复杂度的认知过程。而深度学习具有实现非线性和特征提取的强大能力，很适合对复杂的学习过程进行建模，特别是当有大量的学习交互数据可用时。近年来，许多关于深度学习KT模型的研究工作已经被提出，我们将从以下四个子类别引入深度学习模型。</p>
 <p>1）DKT；<br>2）记忆感知的KT；<br>3）AKT；<br>4）GKT。</p>
-<h4 id="DKT"><a href="#DKT" class="headerlink" title="DKT"></a>DKT</h4><p>DKT是引入深度学习来完成KT任务的开创性方法。DKT采用<strong>RNNs</strong>来处理<strong>随时间变化</strong>的<strong>学习互动的输入序列</strong>，保持一个隐含着序列中所有过去元素历史信息的隐藏状态。这个隐藏状态是根据以前的知识状态和现在的输入学习互动而演变的。DKT提供了知识状态的高维和连续表示，使其能够更有效地模拟复杂的学习过程。通常，RNNs的变体，即<strong>长短时记忆（LSTM）网络</strong>，在实现DKT的过程中更经常使用，通过<strong>考虑遗忘</strong>来进一步加强。</p>
+<h3 id="DKT"><a href="#DKT" class="headerlink" title="DKT"></a>DKT</h3><p>DKT是引入深度学习来完成KT任务的开创性方法。DKT采用<strong>RNNs</strong>来处理<strong>随时间变化</strong>的<strong>学习互动的输入序列</strong>，保持一个隐含着序列中所有过去元素历史信息的隐藏状态。这个隐藏状态是根据以前的知识状态和现在的输入学习互动而演变的。DKT提供了知识状态的高维和连续表示，使其能够更有效地模拟复杂的学习过程。通常，RNNs的变体，即<strong>长短时记忆（LSTM）网络</strong>，在实现DKT的过程中更经常使用，通过<strong>考虑遗忘</strong>来进一步加强。</p>
 <p>下图说明了DKT的过程。</p>
 <img  
                      lazyload
@@ -577,7 +577,7 @@
                 >
 
 <p>这里tanh是激活函数，W hs 是输入权重，W hh 是递归权重，W yh 是读出权重，b h和b y是偏置项。尽管与贝叶斯和逻辑模型相比表现出卓越的性能，但DKT有几个固有的缺点。例如，缺乏可解释性是一个重要的缺点。要理解隐藏状态如何代表学生的知识状态是很有挑战性的，模型不能明确地从隐藏状态中确定学生的知识掌握情况。然而，尽管有这些缺点，DKT仍然是一种有前途的KT模式</p>
-<h4 id="Memory-Aware-KT"><a href="#Memory-Aware-KT" class="headerlink" title="Memory-Aware KT"></a>Memory-Aware KT</h4><p>为了提高DKT的可解释性，<strong>内存感知的KT</strong>引入了一个外部内存模块，该模块旨在存储和更新学生相应的知识掌握情况。最有代表性的例子是用于KT的<strong>动态键值记忆网络（DKVMNs</strong>）。DKVMN强调了学生在各种知识类别上的具体知识状态。它初始化了一个静态矩阵，被称为存储潜在<strong>KC的关键矩阵</strong>和一个<strong>动态矩阵</strong>，被称为值矩阵，通过<strong>随时间变化的读写</strong>操作来存储和<strong>更新相应KC的掌握情况</strong>。如图所示：</p>
+<h3 id="Memory-Aware-KT"><a href="#Memory-Aware-KT" class="headerlink" title="Memory-Aware KT"></a>Memory-Aware KT</h3><p>为了提高DKT的可解释性，<strong>内存感知的KT</strong>引入了一个外部内存模块，该模块旨在存储和更新学生相应的知识掌握情况。最有代表性的例子是用于KT的<strong>动态键值记忆网络（DKVMNs</strong>）。DKVMN强调了学生在各种知识类别上的具体知识状态。它初始化了一个静态矩阵，被称为存储潜在<strong>KC的关键矩阵</strong>和一个<strong>动态矩阵</strong>，被称为值矩阵，通过<strong>随时间变化的读写</strong>操作来存储和<strong>更新相应KC的掌握情况</strong>。如图所示：</p>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -610,7 +610,7 @@
                 >
 
 <p>W e和W d是权重，b e和b d是偏置项，DKVMN未能捕捉到学习过程中的长期依赖关系。因此，又提出了一个顺序KVMN（SKVMN），以结合DKT递归建模能力和DKVMN记忆能力的优势。在SKVMN中，一个被称为Hop-LSTM的改良LSTM被用来根据潜在KC的相关性在LSTM单元之间跳跃，这直接捕捉到了长期的依赖关系。在写作过程中，SKVMN允许计算一个新练习的知识增长，考虑到当前的知识状态，从而产生更合理的结果。</p>
-<h4 id="Attentive-KT"><a href="#Attentive-KT" class="headerlink" title="Attentive KT"></a>Attentive KT</h4><p>在深度学习的发展中，Transformer最初被提出用于神经机器翻译，它放弃了递归，仅仅依靠<strong>自我注意机制</strong>来捕捉序列中的全局依赖关系。Transformer已被证明在<strong>特征提取</strong>和<strong>依赖性捕捉</strong>方面表现出色，同时保持高计算效率。一些基于Transformer的代表性预训练模型，如BERT和GPT，在各种自然语言处理任务上获得了最先进的结果。PandeyandKarypis提出了一个用于KT的自我注意模型（SAKT），它直接<strong>应用Transformer来捕捉学生之间的长期依赖关系</strong>。此外，引入了<strong>一个自适应的稀疏自我注意网络</strong>来<strong>生成缺失的特征</strong>，并同时产生对学生表现的细粒度预测。Zhu等人采用了多头ProbSparse自我注意机制来减轻时间的复杂性，并有效地捕捉学生之间的长期依赖关系。</p>
+<h3 id="Attentive-KT"><a href="#Attentive-KT" class="headerlink" title="Attentive KT"></a>Attentive KT</h3><p>在深度学习的发展中，Transformer最初被提出用于神经机器翻译，它放弃了递归，仅仅依靠<strong>自我注意机制</strong>来捕捉序列中的全局依赖关系。Transformer已被证明在<strong>特征提取</strong>和<strong>依赖性捕捉</strong>方面表现出色，同时保持高计算效率。一些基于Transformer的代表性预训练模型，如BERT和GPT，在各种自然语言处理任务上获得了最先进的结果。PandeyandKarypis提出了一个用于KT的自我注意模型（SAKT），它直接<strong>应用Transformer来捕捉学生之间的长期依赖关系</strong>。此外，引入了<strong>一个自适应的稀疏自我注意网络</strong>来<strong>生成缺失的特征</strong>，并同时产生对学生表现的细粒度预测。Zhu等人采用了多头ProbSparse自我注意机制来减轻时间的复杂性，并有效地捕捉学生之间的长期依赖关系。</p>
 <p>然而，KT任务的复杂性往往限制了上述简单Transformer应用的性能。Choi等人引入了一种名为分离式自注意神经KT（SAINT）的新方法，以加强自注意计算对KT的适应性。具体来说，SAINT采用了一个编码器与解码器的结构，练习和答案嵌入<strong>分别由自我注意层进行编码和解码</strong>。输入的分离使得SAINT可以多次堆叠自我注意层，从而<strong>捕捉到</strong>学生互动中的复杂关系。随后，Shin等人介绍了SAINT+模型，该模型将两个<strong>时间特征</strong>整合到SAINT中：即回答每个练习<strong>所需的时间</strong>和连续学习互动的<strong>间隔时间</strong>。SAINT和SAINT+在学生成绩预测任务上的表现都<strong>超过了SAKT模型</strong>。此外，Ghosh等人观察到SAKT在实验中并没有超过DKT和DKVMN。与SAINT和SAINT+不同，它们提出了一个<strong>上下文感知的AKT模型</strong>。这个模型将自我注意机制与心理测量模型相结合，创造了一个更有效的系统。AKT由四个模块组成。</p>
 <img  
                      lazyload
@@ -629,7 +629,7 @@
 
 <p>其中q (c t ,a t ) ∈RD是KC-答案嵌入，f (c t ,a t ) ∈RD是变化向量。通过上述嵌入，被标记为相同KC的练习被确定为密切相关，同时保留了重要的个体特征。然后，在练习编码器中，输入是练习嵌入{e 1, …, e t}，输出是一串上下文感知练习嵌入{ ̃ e 1, …, ̃ e t}。AKT设计了一个单调的注意力机制来完成上述程序。</p>
 <p>AKT中提出的新型单调注意机制是基于这样的假设：学习过程是时间性的，学生的知识会随着时间的推移而衰减。因此，原始Transformer中利用的缩放内积注意机制不适合KT任务。AKT使用指数衰减和上下文感知的相对距离测量来计算注意力权重。最后，AKT在预测学生未来答案方面取得了出色的表现，同时也证明了由于心理测量模型的结合而产生的可解释性。值得注意的是，，在整个学习过程中，AKT模型从学生连续、重复的互动中明显受益。去除数据集中这些重复的交互作用导致AKT的性能下降，使其接近DKVMN的性能。此外，根据Yin等人的研究结果，现有的AKT模型主要是追踪学习者的学习活动模式，而不是其不断发展的知识状态。因此，他们开发了Transformer模型以促进稳定的知识状态估计和追踪，而不是仅仅关注下一个性能预测。</p>
-<h4 id="Graph-Based-KT"><a href="#Graph-Based-KT" class="headerlink" title="Graph-Based KT"></a>Graph-Based KT</h4><p>图神经网络是为处理复杂的图相关数据而设计的。图代表了一种数据结构，它对一组对象（节点）和它们的关系（边）进行建模。从数据结构的角度来看，KCs内有一个自然存在的图结构。因此，将KC的图结构作为额外的信息纳入到KT任务中应该是有益的。Nakagawa等人提出了GKT，它将KC的潜在图结构概念化为一个图G &#x3D;( V,E)，其中节点V &#x3D; {v 1,v 2,…,vN }代表KC的集合，边E⊆V×V代表这些KC的关系；此外，ht &#x3D; {ht i∈ V }代表学生在时间t回答练习后的时间知识状态。GKT的结构如下图所示：</p>
+<h3 id="Graph-Based-KT"><a href="#Graph-Based-KT" class="headerlink" title="Graph-Based KT"></a>Graph-Based KT</h3><p>图神经网络是为处理复杂的图相关数据而设计的。图代表了一种数据结构，它对一组对象（节点）和它们的关系（边）进行建模。从数据结构的角度来看，KCs内有一个自然存在的图结构。因此，将KC的图结构作为额外的信息纳入到KT任务中应该是有益的。Nakagawa等人提出了GKT，它将KC的潜在图结构概念化为一个图G &#x3D;( V,E)，其中节点V &#x3D; {v 1,v 2,…,vN }代表KC的集合，边E⊆V×V代表这些KC的关系；此外，ht &#x3D; {ht i∈ V }代表学生在时间t回答练习后的时间知识状态。GKT的结构如下图所示：</p>
 <img  
                      lazyload
                      src="/images/loading.svg"
@@ -662,7 +662,7 @@
                 >
 
 <p>其中W k是权重参数，b k是偏置项。除了通过图神经网络对KC中的图结构进行建模外，Lu等人还对KC中的图结构进行了建模，提出在概念图中对教育关系和拓扑结构进行建模，其目的是作为构建KT模型的数学约束。</p>
-<h2 id="Variants-of-KT-Models"><a href="#Variants-of-KT-Models" class="headerlink" title="Variants of KT Models"></a>Variants of KT Models</h2><p>上述基本的KT模型虽然简单明了，但在现实世界的学习场景中可能会降低性能。因此，在更严格的假设下提出了许多变体，反映了现实世界场景中更全面的学习过程。因此，我们将目前基本的KT模型的变体分为以下四类进行分类和回顾：</p>
+<h1 id="Variants-of-KT-Models"><a href="#Variants-of-KT-Models" class="headerlink" title="Variants of KT Models"></a>Variants of KT Models</h1><p>上述基本的KT模型虽然简单明了，但在现实世界的学习场景中可能会降低性能。因此，在更严格的假设下提出了许多变体，反映了现实世界场景中更全面的学习过程。因此，我们将目前基本的KT模型的变体分为以下四类进行分类和回顾：</p>
 <p><strong>1）学习前的个体化建模</strong></p>
 <p>提出了BKT的两个简单变体，分别对学生进行了<strong>个性化的初始掌握概率</strong>和从未学习的状态过渡到学习状态的概率。具体来说，增加一个学生节点来个性化每个学生的初始掌握概率。学生节点为每个学生分配一个个性化的初始掌握概率。设计了一个条件概率表来确定学生节点的值。同样地，如果改变学生节点与后续知识节点的连接，过渡概率参数也可以被个性化。在这种情况下，学生节点给每个学生提供个性化的过渡参数。此外，在BKT中，BKT的其他一些变体选择同时对所有四个BKT参数进行个体化。Lee和Brunskill提出，当应用于智能辅导系统时，个性化的BKT模型可以对学生的学习效果产生良好的改善，使20%的学生达到掌握程度所需的问题量减少约一半。</p>
 <p>另一种对个体化进行建模的手段是<strong>聚类</strong>，它考虑了不同群体中更广泛的学生。通过将学生聚类为不同的组，我们可以训练不同的KT模型并对测试数据进行预测。然后，聚类的数量根据学生群体的不同而变化，预测过程反复进行。最后，我们可以得到一组不同的预测结果。此外，有两种常见的方法用于结合这些预测。<br>1）统一平均法，即简单地对预测进行平均；<br>2）加权平均法，即通过加权平均法将模型结合起来。<br>为了实现聚类，K-means是一种基本的聚类算法，它随机初始化一组聚类中心点，这些中心点是用欧氏距离识别的。另一种流行的聚类算法是频谱聚类，它将数据表示为一个无向图，并分析从数据点的成对相似性得到的图拉普拉斯的频谱。最近，一些新的聚类算法被提出，包括离散非负谱聚类和聚类不确定数据。</p>
@@ -692,7 +692,7 @@
 <p>1）预测问题的KCs；</p>
 <p>2）预测个性化的先验知识。</p>
 <p>通过对这些任务的训练，KT可以加强对问题和KC之间内在关系的理解，同时明确地捕捉到学生层面的变化。在解决编程问题时，我们可以记录学生提交的完整代码，这可以用来分析他们的编程能力。Kasurinen和Nikula收集了学生的编程数据并分析了他们的个性化编程偏好。研究开始时，对学生的错误进行了统计分析，然后对学生从他们的代码提交中得出的编程结构进行了检查，最后用BKT来衡量学生的编程能力。Wang等人将学生提交的代码转化为嵌入式向量，并将其应用于DKT，以模拟学生的精细编程知识状态。Zhu等人注意到，一个单一的编程问题通常涉及多个KC，因此他们建议从学生那里学习关于编程问题的有用信息。</p>
-<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p>尽管KT是一个新兴的研究领域，但它已经被应用于各种场景中。在下文中，我们将首先调查KT模型在两个典型教育场景中的应用：学习资源推荐和适应性学习。然后，我们将讨论KT在学生学习之外的更广泛的应用。</p>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><p>尽管KT是一个新兴的研究领域，但它已经被应用于各种场景中。在下文中，我们将首先调查KT模型在两个典型教育场景中的应用：学习资源推荐和适应性学习。然后，我们将讨论KT在学生学习之外的更广泛的应用。</p>
 <p><strong>1、学习资源推荐：</strong></p>
 <p>传统上，每个学生的学习资源是以两种方式之一选择的。第一种是要求教师手动选择合适的资源，与学生的知识水平相匹配。然而，这种方法需要大量的时间和精力，而且不同的教师可能有不同的偏好。第二种允许学生自己自由选择资源进行学习。然而，这可能会导致学生选择太容易或太难的材料，对他们的学习没有好处[115]，导致学习效率低。近年来，智能辅导系统的盛行和KT方法的发展使得基于人工设计的算法向每个学生自动推荐适当的练习成为可能。</p>
 <p>练习是最常见的学习资源学习。鉴于推断出的知识状态，一个常见的策略是选择下一个练习，以最好地推进学生的知识习得。Desmarais和Baker提出了原始BKT模型的两个扩展，分别考虑了练习困难和学生的多重尝试行为。这两个扩展被整合到一个BKT序列算法中，根据学生的知识状态向他们推荐练习。具体来说，BKT-序列首先<strong>确定每个练习的预测分数范围</strong>。然后，它为学生应该达到的每项练习计算一个预期分数，<em>这取决于他们当前的知识状态（例如，较低的知识状态将导致较高的预期分数）</em>。<strong>最后，该算法以最接近预期分数的预测分数返回练习。</strong> <em>因此，随着特定KC的知识状态的增长，更难的练习将被推荐</em>，因为更难的练习与较低的预测分数有关。实验结果表明，与使用传统方法的学生相比，使用BKT序列算法的学生能够解决更困难的练习，获得更高的成绩，并在系统中花费更多时间。此外，学生们还表示，BKT-序列算法的效率更高。Wan等人扩展了DKVMN模型，以包括练习的类型和难度。然后，这个模型被用来评估学生的知识状态，并随后在小型私人在线课程中为每个学生推荐个性化的练习。他们进行了一项随机对照试验，表明所提出的个性化运动推荐可以提高学生的学习效率。</p>
@@ -718,7 +718,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-09-13 20:58:52
+                    :</strong> 2024-09-13 21:04:15
             </li>
         
         <li>
@@ -827,7 +827,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">KT-summarize2024</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KT-Overview"><span class="nav-text">KT-Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%B1%BB%E5%9F%BA%E6%9C%ACKT%E6%A8%A1%E5%9E%8B"><span class="nav-text">三类基本KT模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B"><span class="nav-text">贝叶斯模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic%E6%A8%A1%E5%9E%8B"><span class="nav-text">Logistic模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="nav-text">深度学习模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variants-of-KT-Models"><span class="nav-text">Variants of KT Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-text">Application</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KT-Overview"><span class="nav-text">KT-Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%B1%BB%E5%9F%BA%E6%9C%ACKT%E6%A8%A1%E5%9E%8B"><span class="nav-text">三类基本KT模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B"><span class="nav-text">贝叶斯模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BKT"><span class="nav-text">BKT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DBKT"><span class="nav-text">DBKT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic%E6%A8%A1%E5%9E%8B"><span class="nav-text">Logistic模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LFA%E6%A8%A1%E5%9E%8B"><span class="nav-text">LFA模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PFA%E6%A8%A1%E5%9E%8B"><span class="nav-text">PFA模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KT%E6%9C%BA"><span class="nav-text">KT机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="nav-text">深度学习模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DKT"><span class="nav-text">DKT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Aware-KT"><span class="nav-text">Memory-Aware KT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attentive-KT"><span class="nav-text">Attentive KT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Based-KT"><span class="nav-text">Graph-Based KT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variants-of-KT-Models"><span class="nav-text">Variants of KT Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application"><span class="nav-text">Application</span></a></li></ol>
 
     </div>
 </div>

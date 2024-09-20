@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Chiyomi">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2024/09/20/kt-notes920/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="论文标题：基于静态与动态学习需求感知的知识点推荐方法 作者与发表日期： 周洋涛,李青山,褚华,李佳楠,高明彪,卫彪彪.基于静态与动态学习需求感知的知识点推荐方法.软件学报,2024,35(9):4425-4447  期刊或会议名称：软件学报 链接：https:&#x2F;&#x2F;www.jos.org.cn&#x2F;jos&#x2F;article&#x2F;abstract&#x2F;6962?st&#x3D;article_issue  DOI： 10.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读笔记920">
+<meta property="og:url" content="http://example.com/2024/09/20/KT-notes920/index.html">
+<meta property="og:site_name" content="Memoryβ">
+<meta property="og:description" content="论文标题：基于静态与动态学习需求感知的知识点推荐方法 作者与发表日期： 周洋涛,李青山,褚华,李佳楠,高明彪,卫彪彪.基于静态与动态学习需求感知的知识点推荐方法.软件学报,2024,35(9):4425-4447  期刊或会议名称：软件学报 链接：https:&#x2F;&#x2F;www.jos.org.cn&#x2F;jos&#x2F;article&#x2F;abstract&#x2F;6962?st&#x3D;article_issue  DOI： 10.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726826164014.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726828405430.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726828425729.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726828934278.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726829095053.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726830806828.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726830795834.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726831016755.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726831075304.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726831203097.png">
+<meta property="og:image" content="http://example.com/2024/09/20/KT-notes920/1726831358123.png">
+<meta property="article:published_time" content="2024-09-20T06:45:32.000Z">
+<meta property="article:modified_time" content="2024-09-20T11:33:23.341Z">
+<meta property="article:author" content="Chiyomi">
+<meta property="article:tag" content="edu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/09/20/KT-notes920/1726826164014.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/animal-print1.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/animal-print1.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/animal-print1.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            论文阅读笔记920 -
+        
+        Memoryβ
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"(⸝⸝>ᴗ(>ᴗ<⸝⸝）","subtitle":{"text":["Per aspera ad astra."],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/7/19 20:30:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Memoryβ
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Memoryβ
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">论文阅读笔记920</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/cat.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Chiyomi</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-09-20 14:45:32</span>
+        <span class="mobile">2024-09-20 14:45:32</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-09-20 19:33:23</span>
+            <span class="mobile">2024-09-20 19:33:23</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/edu/">edu</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <ul>
+<li><strong>论文标题</strong>：基于静态与动态学习需求感知的知识点推荐方法</li>
+<li><strong>作者与发表日期</strong>： 周洋涛,李青山,褚华,李佳楠,高明彪,卫彪彪.基于静态与动态学习需求感知的知识点推荐方法.软件学报,2024,35(9):4425-4447 </li>
+<li><strong>期刊或会议名称</strong>：软件学报</li>
+<li><strong>链接</strong>：<a class="link"   target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/abstract/6962?st=article_issue" >https://www.jos.org.cn/jos/article/abstract/6962?st=article_issue <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><strong>DOI：</strong> <a href="">10.13328&#x2F;j.cnki.jos.006962</a> </li>
+<li><strong>摘要：</strong> 随着互联网信息技术的高速发展, 线上学习资源的爆炸式增长引起了“信息过载”与“学习迷航”问题. 在缺乏专家指导的场景中, 用户难以明确自己的学习需求并从海量的学习资源中选择合适的内容进行学习. 教育领域推荐方法能够基于用户的历史学习行为提供学习资源的个性化推荐, 因此该方法近年来受到大量研究人员的广泛关注. 然而, 现有的教育领域推荐方法在学习需求感知时忽略了对知识点之间复杂关系的建模, 同时缺乏考虑用户学习需求的动态性变化, 导致推荐的学习资源不够精准. 针对上述问题, 提出一种基于静态与动态学习需求感知的知识点推荐方法, 通过静态感知与动态感知相结合的方式建模复杂知识关联下的用户学习行为. 对于静态学习需求感知, 设计一种基于知识点先修后继元路径引导的注意力图卷积网络, 通过建模知识点之间先修后继关系的复杂约束, 能够消除其他非学习需求因素的干扰, 从而精准地捕获用户在细粒度知识点层面上的静态学习需求; 对于动态学习需求感知, 所提方法以课程为单元聚合知识点嵌入以表征用户在不同时刻的知识水平, 然后采用循环神经网络建模编码用户的知识水平序列, 能够有效地挖掘用户知识水平变化中蕴含的动态学习需求; 最后, 对获得的静态与动态学习需求进行融合, 在同一框架下建模静态与动态学习需求之间的兼容性, 促进这两种学习需求相互补充, 以实现细粒度的个性化知识点推荐. 实验表明, 在两个公开数据集上, 所提方法能够有效地感知用户的学习需求并提供个性化的知识点推荐, 在多种评估指标上优于主流的推荐方法.</li>
+</ul>
+<p> <strong>关键词:</strong><a class="link"   target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/search?jid=jos&field=key_word&key=%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8E%A8%E8%8D%90" >知识点推荐 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><strong>;</strong><a class="link"   target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/search?jid=jos&field=key_word&key=%E7%9F%A5%E8%AF%86%E6%84%9F%E7%9F%A5" >知识感知 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><strong>;</strong><a class="link"   target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/search?jid=jos&field=key_word&key=%E5%8A%A8%E6%80%81%E6%80%A7%E5%BB%BA%E6%A8%A1" >动态性建模 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><strong>;</strong><a class="link"   target="_blank" rel="noopener" href="https://www.jos.org.cn/jos/article/search?jid=jos&field=key_word&key=%E5%AD%A6%E4%B9%A0%E9%9C%80%E6%B1%82%E8%9E%8D%E5%90%88" >学习需求融合 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> </p>
+<h2 id="1-研究背景"><a href="#1-研究背景" class="headerlink" title="1. 研究背景"></a>1. 研究背景</h2><ul>
+<li><strong>信息过载</strong>与<strong>学习迷航</strong>问题：随着在线学习资源的爆炸式增长，用户难以明确学习需求并选择合适的资源。</li>
+<li><strong>现有推荐方法局限</strong>：忽视知识点复杂关系建模，未考虑用户<strong>学习需求的动态变化</strong>，导致推荐不精准。</li>
+</ul>
+<p>和其他领域推荐系统相比，<strong>教育领域推荐系统面临的挑战</strong>：</p>
+<ul>
+<li><p><strong>学习资源的多样性</strong>：不同于其他领域的单一推荐对象，教育领域有多种推荐对象（如课程、视频、知识点等），且它们之间存在复杂的关联关系（如课程与知识点的包含关系、知识点的先修后继关系）。</p>
+</li>
+<li><p><strong>学习者的特殊需求</strong>：学习者的目标是掌握知识点，并受到资源关联的约束。推荐不当（如未遵循知识点的先修后继关系）可能导致学习失败。</p>
+</li>
+</ul>
+<h2 id="2-研究问题"><a href="#2-研究问题" class="headerlink" title="2. 研究问题"></a>2. <strong>研究问题</strong></h2><p>在感知用户的学习需求时注意：</p>
+<p>（1）对<strong>知识点之间复杂关系进行建模</strong></p>
+<p>（2）考虑用户<strong>学习需求</strong>的<strong>动态性变化</strong></p>
+<p>针对这两个问题改进解决，提供更加精准的学习资源推荐</p>
+<h2 id="3-研究方法"><a href="#3-研究方法" class="headerlink" title="3. 研究方法"></a>3. <strong>研究方法</strong></h2><p>框架图如下</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726826164014.png"
+                      class="" width="1726826164014"
+                >
+
+<h3 id="3-1-方法概述"><a href="#3-1-方法概述" class="headerlink" title="3.1 方法概述"></a>3.1 方法概述</h3><ul>
+<li><strong>静态学习需求建模</strong>：显式建模知识点之间的复杂关系（如先修后继关系），挖掘细粒度的静态学习需求。</li>
+<li><strong>动态学习需求建模</strong>：编码用户每阶段的知识水平，使用循环神经网络序列化建模，捕获动态学习需求。</li>
+</ul>
+<h3 id="3-2-主要贡献"><a href="#3-2-主要贡献" class="headerlink" title="3.2 主要贡献"></a>3.2 主要贡献</h3><ol>
+<li><strong>综合建模</strong>：提出基于静态与动态学习需求感知的推荐方法，结合图卷积网络和循环神经网络，在统一框架中实现细粒度且实时动态的学习需求建模。</li>
+<li><strong>静态建模方法</strong>：使用<strong>基于元路径</strong>（特别是先修后继关系）<strong>的图卷积网络</strong>显式建模知识点间的复杂关系，精确感知细粒度的学习需求。</li>
+<li><strong>动态建模方法</strong>：以课程为单位建模知识水平，利用<strong>循环神经网络</strong>分析用户知识水平的<strong>动态变化</strong>，提供动态学习需求引导。</li>
+<li><strong>模型验证</strong>：在<strong>公开数据集 MOOCCube</strong> 上进行综合对比实验，验证了模型在教育推荐中的有效性。</li>
+</ol>
+<h3 id="3-3-技术细节"><a href="#3-3-技术细节" class="headerlink" title="3.3 技术细节"></a>3.3 技术细节</h3><h4 id="3-3-1-图卷积网络（GCN）"><a href="#3-3-1-图卷积网络（GCN）" class="headerlink" title="3.3.1 图卷积网络（GCN）"></a>3.3.1 图卷积网络（GCN）</h4><p>图卷积网络的核心思想是通过邻居节点的特征来更新每个节点的特征。与传统卷积操作类似，GCN的“卷积”实际上是对每个节点及其邻居节点的信息进行聚合，计算新的节点特征表示。这一过程可以看作是图中的“消息传递”。</p>
+<p> <strong>GCN的计算过程</strong></p>
+<p>对于一个图中的每个节点，GCN通过以下步骤更新节点特征：</p>
+<ul>
+<li><strong>信息聚合（Aggregate）</strong>：从当前节点的邻居节点收集特征信息，通常是通过对邻居节点特征的求和或平均。</li>
+<li><strong>特征变换（Transform）</strong>：将聚合后的特征通过一个线性变换（通常是通过权重矩阵的乘法），并经过非线性激活函数（如ReLU）得到新的特征表示。</li>
+</ul>
+<p>具体公式为：</p>
+<p>​                                          <strong>H^(l+1)^&#x3D;σ(AH^(l)^W^(l)^)</strong></p>
+<ul>
+<li><strong>H^(l)^</strong>：第 l 层节点的特征矩阵，初始为节点的输入特征。</li>
+<li><strong>W^(l)^</strong>：第 l 层的权重矩阵，用于特征变换。</li>
+<li><strong>σ</strong>：非线性激活函数（如ReLU）。</li>
+<li><strong>A^hat^</strong>：归一化后的邻接矩阵，用于邻居信息的聚合。</li>
+</ul>
+<p>图的邻接矩阵 <strong>A</strong> 用于描述节点之间的连接关系，通常在GCN中，会使用归一化的邻接矩阵 <strong>A^hat^</strong>，即：</p>
+<p>​                                        <strong>A^hat^ &#x3D;D^−1&#x2F;2^ A D^−1&#x2F;2^</strong></p>
+<p>其中，<strong>D 是度矩阵</strong>，用于归一化邻接矩阵，确保信息在聚合时保持尺度不变。</p>
+<hr>
+<p>用GCN建模<strong>复杂知识点的先修和后继关系</strong>，主要是通过将知识点视为图中的<strong>节点</strong>，而知识点之间的先修和后继关系作为<strong>边</strong>，从而利用图卷积网络在图结构中进行特征传播和学习。 </p>
+<ul>
+<li><p><strong>节点</strong>：每个<strong>知识点</strong>作为一个节点。节点的特征可以是该知识点的特性或学生的掌握程度等信息。</p>
+</li>
+<li><p><strong>边</strong>：先修知识点和后继知识点之间的关系用边表示。先修关系（从基础到进阶）在图中形成有向边，指示学习的顺序和依赖。</p>
+</li>
+</ul>
+<p>每个知识点<strong>节点初始化特征向量</strong>，特征可以基于：</p>
+<ul>
+<li>知识点本身的属性（如知识点的重要性、难度等）。</li>
+<li>学生对知识点的掌握情况（如得分、熟练度）。</li>
+</ul>
+<p><strong>GCN模型的设计:</strong></p>
+<ul>
+<li>使用图卷积网络来对知识点及其关联关系进行建模。GCN的每一层将根据节点的邻居（即先修或后继的知识点）来更新节点的表示。</li>
+<li>邻居信息的聚合方式反映了先修知识点如何影响后继知识点的表示。例如，如果一个知识点的多个先修知识点掌握得好，那么这个知识点可能更容易被掌握。</li>
+</ul>
+<p><strong>信息传递与特征更新：</strong></p>
+<ul>
+<li>在GCN的每一层中，先修知识点的特征向量被聚合到后继知识点的特征中，经过线性变换和非线性激活，逐层传播信息。</li>
+<li>这种信息聚合方式模拟了先修知识点对学习后继知识点的影响，帮助模型更好地理解知识点之间的复杂依赖关系。</li>
+</ul>
+<p><strong>训练与应用：</strong></p>
+<ul>
+<li>通过已知的训练数据（如学生的答题记录、知识点的掌握情况），训练GCN模型，以学习<strong>每个知识点的最终特征表示</strong>。</li>
+<li>模型可以用于：<ul>
+<li><strong>预测掌握程度</strong>：根据学生对先修知识点的掌握情况，预测学生对后继知识点的掌握。</li>
+<li><strong>知识推荐</strong>：根据学习路径，推荐学生需要重点复习的知识点或未来需要学习的内容。</li>
+</ul>
+</li>
+</ul>
+<p>最后，模型输出每个知识点的嵌入表示，包含了知识点的先修后继关系以及学习者的状态，可以用于进一步的教育应用，如个性化学习路径推荐、知识点的难度预测等。 </p>
+<h4 id="3-3-4-RNN："><a href="#3-3-4-RNN：" class="headerlink" title="3.3.4 RNN："></a>3.3.4 RNN：</h4><p>利用<strong>RNN（循环神经网络）</strong>捕捉用户的知识水平序列和动态需求变化，适合处理与时间相关的序列数据。RNN可以通过用户的学习历史、考试记录等时间序列信息，来挖掘用户知识水平的变化趋势和需求的动态变化。</p>
+<p><strong>用户知识水平序列建模</strong></p>
+<ul>
+<li><strong>输入序列</strong>：RNN的输入可以是用户在一段时间内对各个知识点的掌握情况（如答题正确率、学习时长等），每个时间步对应用户某时刻的学习状态。</li>
+<li><strong>时间依赖性</strong>：RNN的关键特性是能捕捉数据的时间依赖性，因此可以跟踪用户知识水平随时间的变化，了解知识掌握的动态过程。</li>
+</ul>
+<p><strong>知识水平的状态更新</strong></p>
+<ul>
+<li>在每个时间步，RNN会根据当前输入（当前的学习情况）以及上一时刻的状态（用户之前的知识掌握情况），更新用户的知识状态。</li>
+<li>这种机制可以捕捉用户知识水平的累积和遗忘。例如，如果一个用户长时间没有接触某个知识点，模型可能会预测该知识点的熟练度下降。</li>
+</ul>
+<p> <strong>动态需求的挖掘</strong></p>
+<ul>
+<li>RNN可以通过学习知识水平的序列，挖掘用户对不同知识点的<strong>动态需求变化</strong>，即哪些知识点在当前学习阶段需要更多关注。</li>
+<li>例如，当RNN检测到用户对某个知识点的掌握水平下降时，可以建议用户复习该知识点；或者根据学习的先修后继关系，预测用户将来可能需要学习的知识点。</li>
+</ul>
+<p><strong>个性化学习路径推荐</strong></p>
+<ul>
+<li>通过分析用户的知识水平变化，RNN可以预测未来学习的需求，进而生成个性化的学习路径。</li>
+<li>例如，RNN可以帮助确定下一个用户最需要学习的知识点，或者预测用户对即将学习的内容可能的掌握程度，从而动态调整学习计划。</li>
+</ul>
+<p><strong>模型输出</strong></p>
+<ul>
+<li>RNN输出的是用户在每个时间步的知识状态，表示其当前知识掌握情况。结合这些状态，系统可以为用户提供个性化的学习建议，如知识点复习、未来学习规划等。</li>
+</ul>
+<h3 id="3-4-实验结果"><a href="#3-4-实验结果" class="headerlink" title="3.4 实验结果"></a>3.4 实验结果</h3><ul>
+<li>在两个公开数据集上进行验证。</li>
+<li><strong>效果优于主流方法</strong>：多个评估指标显示，提出的方法能更好地感知学习需求并提供个性化推荐。</li>
+</ul>
+<h2 id="4-详细介绍"><a href="#4-详细介绍" class="headerlink" title="4. 详细介绍"></a>4. 详细介绍</h2><h3 id="4-1-静态学习建模"><a href="#4-1-静态学习建模" class="headerlink" title="4.1 静态学习建模"></a>4.1 静态学习建模</h3><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726828405430.png"
+                       alt="1726828405430" style="zoom:80%;" 
+                >
+
+<p>主要两步，首先是给特征做初始化，然后是进行元路径引导的注意力图卷积。</p>
+<h4 id="4-1-1-特征初始化"><a href="#4-1-1-特征初始化" class="headerlink" title="4.1.1 特征初始化"></a>4.1.1 特征初始化</h4><p>分别给用户user和知识点concept做特征初始化</p>
+<p>判断两种知识点是不是同种类型的知识点：</p>
+<ul>
+<li>否：说明是不同类的知识点，则记为<strong>交互知识元路径</strong></li>
+<li>是：说明是同类的，可能存在有依赖关系的，记为<strong>先修后继知识元路径</strong></li>
+</ul>
+<p><strong>（1）交互知识元路径：</strong>找出对推荐效果贡献最大的几种为例</p>
+<p>1）K←U→K  一个用户掌握两个知识点</p>
+<p>2）U→C←U 两个人学习同一门课程</p>
+<p>3）U←K→U 两个用户都掌握了同一个知识点（该元路径对应的邻接矩阵表示为A^UKU^）</p>
+<p>4）U→C←T→C←U   两个人上的不同课是同一个老师教的 </p>
+<p>计算出来的带有自适应特征的元路径邻接矩阵可以继续计算得出元路径的<strong>特征矩阵P^UKU^</strong>，然后可以<strong>用于引导图卷积的信息聚合过程</strong></p>
+<p><strong>（2）先修后继知识元路径：</strong></p>
+<p>K→K    简记为kk</p>
+<p>也是通过系列计算得到它的元路径特征矩阵</p>
+<h4 id="4-1-2-元路径引导的注意力图卷积"><a href="#4-1-2-元路径引导的注意力图卷积" class="headerlink" title="4.1.2 元路径引导的注意力图卷积"></a>4.1.2 元路径引导的注意力图卷积</h4><p><strong>（1）元路径引导图卷积：</strong></p>
+<ul>
+<li>输入：f ^User^、f ^concept^ （用户和知识点的初始内容特征嵌入表达）</li>
+<li>图卷积：用我们刚才计算得到的那些元路径的特征矩阵（P^UKU^、P^KK^……）替代了以前普通的图卷积中使用的用户-物品邻接矩阵</li>
+<li>输出：挖掘异构关联关系</li>
+</ul>
+<p>其中，基于P ^KK^ 引导多层图卷积的信息传播公式为：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726828425729.png"
+                      class="" width="1726828425729"
+                >
+
+<p>使用了ReLU非线性激活操作，W共享权重可以更好地正则化（降低模型复杂度），公式最后得到的是一个实体经过l+1层图卷积后计算得到的最新嵌入表达。</p>
+<hr>
+<p><strong>（2）注意力异构关系融合：</strong></p>
+<p>因为不同元路径引导图卷积获得的实体嵌入表达所<strong>蕴含的信息不同</strong>，所以采取<strong>注意力机制</strong>实现知识的<strong>自动加权融合</strong>，以此获得最终的用户<strong>静态学习需求&#x2F;知识点的嵌入表达</strong>。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726828934278.png"
+                      class="" width="1726828934278"
+                >
+
+<p>V static表示融合了MP U集合中所有元路径引导下用户实体嵌入表达后获得的<strong>最终的用户实体嵌入表达</strong>, 即用 户的静态学习需求嵌入表达</p>
+<p>同理我们也可以得到知识点的实体嵌入表达：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726829095053.png"
+                      class="" width="1726829095053"
+                >
+
+<h3 id="4-2-动态学习需求建模"><a href="#4-2-动态学习需求建模" class="headerlink" title="4.2 动态学习需求建模"></a>4.2 动态学习需求建模</h3><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726830806828.png"
+                       alt="1726830806828" style="zoom:80%;" 
+                >
+
+<p>本模块旨在利用静态学习需求建模过程中获得的知识点嵌入表达，对用户在学习过程中的知识水平变化进行追踪，以挖掘下一时刻用户的动态学习需求。</p>
+<h4 id="4-2-1-序列化知识水平编码"><a href="#4-2-1-序列化知识水平编码" class="headerlink" title="4.2.1 序列化知识水平编码"></a>4.2.1 序列化知识水平编码</h4><p>为了表征用户的知识水平，本文以用户学习的可成为编码单元，划分每个课程包含的知识点集合。</p>
+<p>可以获得用户在学完对应课程后提升的知识水平。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726830795834.png"
+                      class="" width="1726830795834"
+                >
+
+<p>这里采用的方法是对<strong>对应的嵌入表达进行累加聚合</strong>。</p>
+<h4 id="4-2-2-动态学习需求挖掘"><a href="#4-2-2-动态学习需求挖掘" class="headerlink" title="4.2.2 动态学习需求挖掘"></a>4.2.2 动态学习需求挖掘</h4><p>采用了具有动态序列化建模能力的RNN来对知识水平动态编码。</p>
+<p>根据用户的知识水平变化序列（表现学习了不同课程后的水平变化），这里采用了RNN的变体GRU门控循环神经网络</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726831016755.png"
+                      class="" width="1726831016755"
+                >
+
+<p>最后时刻得出来的Vdynamic就是用户的动态学习需求</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726831075304.png"
+                      class="" width="1726831075304"
+                >
+
+<p>由于GRU序列化动态建模仅能感知用户个体自身的变化，无法融合不同用户之间的协同信号。</p>
+<p>而静态中虽然可以融合不同用户个体的协同信号，但静态忽略了变化。</p>
+<p>因此，我们要将静态模块中用户静态学习需求的嵌入表达和动态的学习需求嵌入表达进行拼接。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726831203097.png"
+                      class="" width="1726831203097"
+                >
+
+
+
+<h3 id="4-3-知识遗忘矩阵分解"><a href="#4-3-知识遗忘矩阵分解" class="headerlink" title="4.3 知识遗忘矩阵分解"></a>4.3 知识遗忘矩阵分解</h3><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/09/20/KT-notes920/1726831358123.png"
+                       alt="1726831358123" style="zoom:67%;" 
+                >
+
+<h2 id="6-创新点"><a href="#6-创新点" class="headerlink" title="6. 创新点"></a>6. 创新点</h2><p>① 本文首次在知识点推荐任务中<strong>引入先修后继知识元路径</strong>, 通过主流的基于元路径的注意力图卷积网络在信息聚合过程中自然地融合对知识点先修后继关系的建 模, 以捕获用户<strong>全局的静态学习需求</strong>; </p>
+<p>② 本文<strong>以课程为单元</strong>, 聚合每个课程中包含的知识点的嵌入来表征用户在不时刻的知识水平, 再引入循环神经网络建模用户不同时刻知识水平的动态变化, 以捕获用户个体的动态学习 需求; </p>
+<p>③ 虽然图卷积网络能够捕获全局的高阶协同信号, 但缺乏<strong>序列化动态建模</strong>的能力, 而循环神经网络适用于序列化动态建模的场景, 却无法捕获不同个体之间的高阶协同信号, 于是本文设计了一个统一的框架对图卷积和 循环神经网络进行<strong>集成,</strong> 以获得同时感知静态与动态学习需求的能力.</p>
+<h2 id="7-个人评价"><a href="#7-个人评价" class="headerlink" title="7. 个人评价"></a>7. <strong>个人评价</strong></h2><p><strong>1）优点</strong>：改进的思想比较好理解。 在同一框架下建模静态与动态学习需求之间的兼容性, 促进这两种学习需求相互补充与融合, 以实现细粒度的个性化知识点推荐. 大量实验表明该文章提出的知识点推荐方法在多种指标上优于一系列先进的推荐方法。</p>
+<p><strong>2）不足之处</strong>：</p>
+<ul>
+<li>序列化知识水平编码那里，对于知识水平的提升只使用了简单的累加聚合的方法，我感觉对于同一知识点，其学习效果对于水平的提升应该是逐渐变弱的，应该有权重变化才对。</li>
+<li>在学习需求挖掘方面, 本文仅采用一阶的先修后 继知识元路径引导学习需求的显式建模, 可考虑补充高阶的先修后继关系元路径以及互补等其他关系元路径以挖掘更加精准的用户学习需求</li>
+<li>数据稀疏性问题是困扰推荐系统多年的一个开放性问题, 在教育推荐场景中存在多种用户的交互行为, 如点击、收藏、观看时长与评论等, 综合多种交互行为以挖掘用户的学习需求, 是一种具有前景的能够有效应对教育推荐场景中数据稀疏性问题的研究方向.</li>
+</ul>
+<p><strong>3）适用性与启发</strong>：暂时不知道。</p>
+<h2 id="8-关键引用"><a href="#8-关键引用" class="headerlink" title="8. 关键引用"></a>8. <strong>关键引用</strong></h2><p><strong>参考文献</strong>：</p>
+<ul>
+<li>[doi: <a href="">10.1145&#x2F;3377571.3377587</a>] </li>
+<li>[doi: <a href="">10.3969&#x2F;j.issn.1673-4785.201409045</a>] </li>
+<li>[doi: <a href="">10.15888&#x2F;j.cnki.csa.008356</a>]</li>
+<li>[doi: <a href="">10.13328&#x2F;j.cnki.jos.006629</a>]</li>
+<li>[doi: <a href="">10.1016&#x2F;j.neucom.2020.07.064</a>]</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 论文阅读笔记920</li>
+        <li><strong>Author:</strong> Chiyomi</li>
+        <li><strong>Created at
+                :</strong> 2024-09-20 14:45:32</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2024-09-20 19:33:23
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2024/09/20/KT-notes920/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/edu/">#edu</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/09/13/KT-summarize2024/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">KT-summarize2024</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">论文阅读笔记920</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="nav-text">1. 研究背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%A0%94%E7%A9%B6%E9%97%AE%E9%A2%98"><span class="nav-text">2. 研究问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95"><span class="nav-text">3. 研究方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%96%B9%E6%B3%95%E6%A6%82%E8%BF%B0"><span class="nav-text">3.1 方法概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="nav-text">3.2 主要贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="nav-text">3.3 技术细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-text">3.4 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D"><span class="nav-text">4. 详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E9%9D%99%E6%80%81%E5%AD%A6%E4%B9%A0%E5%BB%BA%E6%A8%A1"><span class="nav-text">4.1 静态学习建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%8A%A8%E6%80%81%E5%AD%A6%E4%B9%A0%E9%9C%80%E6%B1%82%E5%BB%BA%E6%A8%A1"><span class="nav-text">4.2 动态学习需求建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E7%9F%A5%E8%AF%86%E9%81%97%E5%BF%98%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3"><span class="nav-text">4.3 知识遗忘矩阵分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-text">6. 创新点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%B8%AA%E4%BA%BA%E8%AF%84%E4%BB%B7"><span class="nav-text">7. 个人评价</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%85%B3%E9%94%AE%E5%BC%95%E7%94%A8"><span class="nav-text">8. 关键引用</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Chiyomi</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        6 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

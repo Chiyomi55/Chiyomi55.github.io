@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Chiyomi">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2024/10/04/sakt-notes/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="Abstract本文开发了一种方法，从学生过去的活动中识别出与给定 knowledge concept (KC) 相关的 KC，并根据它选择的相对较少的 KC 来预测他&#x2F;她的掌握程度。由于预测是基于相对较少的过去活动进行的，因此它比基于 RNN 的方法更好地处理数据稀疏性问题。为了确定 KC 之间的相关性，我们提出了一种基于自我注意的方法，即自我关注知识追踪 （SAKT）。 Introd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAKT-note">
+<meta property="og:url" content="http://example.com/2024/10/04/SAKT-notes/index.html">
+<meta property="og:site_name" content="Memoryβ">
+<meta property="og:description" content="Abstract本文开发了一种方法，从学生过去的活动中识别出与给定 knowledge concept (KC) 相关的 KC，并根据它选择的相对较少的 KC 来预测他&#x2F;她的掌握程度。由于预测是基于相对较少的过去活动进行的，因此它比基于 RNN 的方法更好地处理数据稀疏性问题。为了确定 KC 之间的相关性，我们提出了一种基于自我注意的方法，即自我关注知识追踪 （SAKT）。 Introd">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1727662592870.png">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1727665621262.png">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1727665760632.png">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1727689570808.png">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1728029584075.png">
+<meta property="og:image" content="http://example.com/2024/10/04/SAKT-notes/1728030331307.png">
+<meta property="article:published_time" content="2024-10-04T01:17:18.000Z">
+<meta property="article:modified_time" content="2024-10-04T08:35:46.102Z">
+<meta property="article:author" content="Chiyomi">
+<meta property="article:tag" content="readingnotes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/10/04/SAKT-notes/1727662592870.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/animal-print1.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/animal-print1.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/animal-print1.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            SAKT-note -
+        
+        Memoryβ
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"(⸝⸝>ᴗ(>ᴗ<⸝⸝）","subtitle":{"text":["Per aspera ad astra."],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/7/19 20:30:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+
+    <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        Memoryβ
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [40,0],
+                translateZ: 0,
+                opacity: [0,1],
+                filter: ['blur(5px)', 'blur(0px)'], // Starting from blurred to unblurred
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i,
+            }).add({
+                targets: '.ml13 .letter',
+                translateY: [0,-40],
+                opacity: [1,0],
+                filter: ['blur(0px)', 'blur(5px)'], // Ending from unblurred to blurred
+                easing: "easeInExpo",
+                duration: 1200,
+                delay: (el, i) => 100 + 30 * i,
+                complete: function() {
+                    hidePreloader(); // Call hidePreloader after the animation completes
+                }
+            });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Memoryβ
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">7</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">SAKT-note</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/cat.jpg">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">Chiyomi</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-10-04 09:17:18</span>
+        <span class="mobile">2024-10-04 09:17:18</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-10-04 16:35:46</span>
+            <span class="mobile">2024-10-04 16:35:46</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/readingnotes/">readingnotes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>本文开发了一种方法，从学生过去的活动中识别出与给定 knowledge concept (KC) 相关的 KC，并根据它选择的相对较少的 KC 来预测他&#x2F;她的掌握程度。由于预测是基于相对较少的过去活动进行的，因此它比基于 RNN 的方法更好地处理数据稀疏性问题。为了确定 KC 之间的相关性，我们提出了一种基于自我注意的方法，即自我关注知识追踪 （SAKT）。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1727662592870.png"
+                      class="" width="1727662592870"
+                >
+
+<p>左子图显示了学生尝试的练习顺序，右子图显示了每个练习所属的知识概念。</p>
+<p>知识追踪 （KT） 被认为是一项重要的任务，被定义为根据学生过去的学习活动追踪学生的知识状态的任务，该知识状态代表他&#x2F;她对 KC 的掌握水平。KT 任务可以正式化为监督序列学习任务 - 给定学生过去的运动互动 X &#x3D; （x1， x2， . . . ， xt），预测他&#x2F;她下一次互动的某个方面 xt+1。在问答平台上，交互表示为 xt &#x3D; （et， rt），其中 et 是学生尝试时间戳 t 的练习，rt 是学生答案的正确性。知识转移旨在预测学生是否能够正确回答下一个练习，即预测 p（rt+1 &#x3D; 1|et+1， X）</p>
+<p>最近深度学习模型，如深度知识追踪 （DKT）及其变体使用递归神经网络 （RNN） 在一个汇总的隐藏向量中对学生的知识状态进行建模。动态键值记忆网络 （DKVMN）利用记忆增强神经网络进行知识转移。它使用两个矩阵，键和值，分别学习练习与底层 KC 和学生知识状态之间的相关性。DKT 模型面临其参数不可解释的问题。DKVMN 比 DKT 更具可解释性，因为它显式维护 KC 表示矩阵（键）和知识状态表示矩阵（值）。然而，由于所有这些深度学习模型都是基于 RNN 的，因此它们在处理稀疏数据时面临着不泛化的问题。</p>
+<p>本文提出的 SAKT 首先从过去的互动中识别相关的 KC，然后根据他&#x2F;她在这些 KC 上的表现预测学生的表现。为了预测学生在练习中的表现，我们使用练习作为 KC。正如我们稍后展示的那样，SAKT <strong>为先前回答的练习分配权重</strong>，同时<strong>预测学生在特定练习中的表现</strong>。所提出的 SAKT 方法明显优于最先进的 KT 方法，在所有数据集中，AUC 的性能平均提高了 4.43%。此外，SAKT 的主要组件 （self-attention） 适用于并行;因此，我们的模型比基于 RNN 的模型快一个数量级。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1727665621262.png"
+                       alt="1727665621262" style="zoom: 67%;" 
+                >
+
+<p>上图为SAKT 网络。在每个时间戳中，仅针对前一个元素估计关注权重。键、值和查询是从如下所示的嵌入层中提取的。当第 j 个元素是 query 且第 i 个元素是 key 时，注意力权重为 ai，j。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1727665760632.png"
+                       alt="1727665760632" style="zoom:67%;" 
+                >
+
+<p>Embedding layer嵌入了学生正在尝试的当前练习和他过去的交互。在每个时间戳 t+1 时，当前问题 et+1 使用 Exercise 嵌入嵌入到查询空间中，并且过去交互的元素 xt 嵌入到 th 中。</p>
+<p>x是交互，e是练习，r是正确性，</p>
+<h2 id="Proposed-method"><a href="#Proposed-method" class="headerlink" title="Proposed method"></a>Proposed method</h2><p><em>我们的模型根据学生之前的交互序列 X &#x3D; x1， x2， . . . ， xt 预测学生是否能够回答下一个练习 et+1。如图 2 所示，我们可以将问题转化为顺序建模 表 1：符号 符号 描述 N 学生总数 E 练习总数 X 学生的交互序列：（x1， x2， . . . ， xt） 习 学生的第 i 对练习-答案对 n 序列的最大长度 d 潜在向量维数 e 学生解决的练习序列 M 交互嵌入矩阵 P 位置嵌入矩阵 E 练习查找矩阵 ˆM过去的互动嵌入 ˆE 运动嵌入问题。考虑输入 x1， x2， . . . ， xt−1 的模型和领先一个位置的练习顺序 e2， e3， . . . ， et 很方便，输出是对练习 r2， r3， . . . ， rt 的反应的正确性。交互元组 xt &#x3D; （et， rt） 以数字 yt &#x3D; et + rt × E 的形式呈现给模型，其中 E 是练习总数。因此，交互序列中的元素可以采用的总值为 2E，而 exercise 序列中的元素可以采用 E 个可能的值。</em></p>
+<p> <em><strong>嵌入层：</strong></em>我们将得到的输入序列 y &#x3D; （y1， y2， . . . ， yt） 转换为 s &#x3D; （s1， s2， . . . ， sn），其中 n 是模型可以处理的最大长度。由于模型可以使用固定长度序列的输入，如果序列长度 t 小于 n，我们会在序列左侧重复添加问答对的<strong>填充</strong>。但是，如果 t 大于 n，我们将序列<strong>划分</strong>为长度为 n 的<strong>子序列</strong>。具体来说，当 t 大于 n 时，yt 被划分为长度为 n 的 t&#x2F;n 子序列。所有这些子序列都用作模型的 Input。<br>我们训练一个交互嵌入矩阵 M ∈ R^2E×d^，其中 d 是潜在维度。此矩阵用于获取序列中每个元素 s^i^ 的嵌入 M^si^。 同样，我们训练练习嵌入矩阵 E ∈ R^E×d^，使得集合 e^i^中的每个练习都嵌入到第 e^i^ 行中。</p>
+<p><strong>位置编码：</strong>位置编码是自注意力神经网络中的一层，用于对位置进行编码，以便像卷积网络和递归神经网络一样，我们可以对序列的顺序进行编码。这一层在知识追踪问题中尤为重要，因为学生的知识状态会随着时间的推移逐渐稳定地发展。为了整合这一点，我们使用了一个参数，位置嵌入，P ∈ Rn×d，它是在训练时学习的。然后将位置嵌入矩阵的第 i 行 Pi 添加到交互序列第 i 个元素的交互嵌入向量中。</p>
+<p>嵌入层的输出是嵌入式交互输入矩阵 ˆM 和嵌入式练习矩阵 ˆE.（如下图）</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1727689570808.png"
+                       alt="1727689570808" style="zoom:80%;" 
+                >
+
+<hr>
+<p><em><strong>自注意层：</strong></em>在我们的模型中，我们使用了缩放的<strong>点积注意力机制</strong> 。此层<strong>查找</strong>与先前解决的<strong>每个练习相对应的相对权重</strong>，以预测当前练习的正确性。 我们使用以下方程获得查询和键值对：<br>$$<br>Q &#x3D; \widehat { E } W ^ { Q } , K &#x3D; \widehat { M } W ^ { K } , V &#x3D; \widehat { M } W ^ { V }<br>$$<br>其中 WQ、WK、WV ∈ Rd×d 分别是查询、键和值投影矩阵，它们将各自的向量线性投影到不同的空间 。之前每个交互与当前练习的相关性是使用注意力权重确定的。为了找到注意力权重，我们使用<strong>缩放的点积</strong> ，定义为：<br>$$<br>A t t e n t i o n ( Q , K , V ) &#x3D; s o t t i m a x ( \frac { Q K ^ { T } } { \sqrt { d } } ) V<br>$$<br><strong>多头：</strong>为了共同关注来自不同代表性子空间的信息，我们使用不同的投影矩阵线性投影查询、键和值 h 次。<br>$$<br> M u l t i h e a d ( \widehat { M } , \widehat { E } ) &#x3D; C o n c a t ( h e a d _ { 1 } , \ldots , h e a d _ { h } ) W ^ { O }<br>$$<br>在预测 （t + 1） st 练习的结果时，我们应该只考虑第一个 t 个交互。因此，对于查询 Qi，不应考虑 j &gt; i 的键 Kj。我们使用因果层来掩盖从未来的交互键中学到的权重<em>（ Causality layer是一种神经网络中的层，它用于处理时间序列数据。在因果层中，网络的输出仅依赖于当前和过去的输入，而不依赖于未来的输入。这种特性使得因果层能够捕捉到时间序列数据的因果关系，从而更好地预测未来的趋势。 ）</em></p>
+<hr>
+<p><em><strong>前馈层：</strong></em>上述自注意力层导致值的加权和，即先前交互的 Vi。但是，从多头层获得的矩阵行 S &#x3D; Multihead（ ˆM， ˆE） 仍然是先前交互作用的值 Vi 的线性组合。为了在模型中加入非线性并考虑不同潜在维度之间的相互作用，我们使用了前馈网络。<br>$$<br>F &#x3D; F F N ( S ) &#x3D; R e L U ( S W ^ { ( 1 ) } + b ^ { ( 1 ) } ) W ^ { ( 2 ) } + b ^ { ( 2 ) }<br>$$<br>其中 W（1） ∈ Rd×d、W（2） ∈ Rd×d、b（1） ∈ Rd、b（2） ∈ Rd 是在训练期间学习的参数。</p>
+<p><strong>残差连接：</strong>残差连接 用于<strong>将较低层特征传播到较高层</strong>。因此，如果低层特征对于预测很重要，则残差连接将有助于将它们传播到执行预测的最终层。在 KT 的背景下，学生尝试属于特定概念的练习以加强该概念。因此，残差连接可以帮助将最近解决的练习的嵌入传播到最后一层，使模型更容易利用低层信息。残差连接在 self-attention 层和 Feed Forward 层之后应用。</p>
+<p><strong>层归一化：</strong>在 <strong>[[1]](<a class="link"   target="_blank" rel="noopener" href="https://github.com/chrispiech/DeepKnowledgeTracing/tree/" >https://github.com/chrispiech/DeepKnowledgeTracing/tree/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> master&#x2F;data&#x2F;synthetic)</strong> 中，表明跨特征归一化输入有助于稳定和加速神经网络。出于相同的目的，我们在架构中使用了层归一化。图层标准化也应用于自注意力层和前馈图层。</p>
+<hr>
+<p> <em><strong>预测层：</strong></em>最后，上面得到的矩阵 Fi 的每一行都通过激活 Sigmoid 的全连接网络来预测学生的表现。<br>$$<br>p _ { i } &#x3D; S i g m o i d ( F _ { i } w + b )<br>$$<br>其中 pi 是一个标量，代表学生对练习 ei 提供正确反应的概率，Fi 是 F 的第 i 行。<br>$$<br>S i g m o i d ( z ) &#x3D; 1 &#x2F; ( 1 + e ^ { - z } )<br>$$<br><strong>网络训练：</strong>训练的目标是<strong>最小化</strong>模型下观察到的学生反应序列的负对数似然。这些参数是通过最小化 pt 和 rt 之间的<strong>交叉熵损失</strong>来学习的。<br>$$<br>C &#x3D; - \sum _ { t } ( r _ { t } \log ( p _ { t } ) + ( 1 - r _ { t } ) \log ( 1 - p _ { t } ) )<br>$$</p>
+<h2 id="Experience-settings"><a href="#Experience-settings" class="headerlink" title="Experience settings"></a>Experience settings</h2><p>指标：预测任务被视为二元分类设置，即正确或否回答练习。因此，我们使用曲线下面积 （AUC） 指标来比较性能。</p>
+<p>方法：我们将我们的模型与最先进的 KT 方法 DKT [6] 、 DKT + [10] 和 DKVMN [11] 进行了比较。这些方法在简介中进行了介绍。 模型训练和参数选择：我们使用 80% 的数据集训练模型，并在剩余数据集上进行测试。对于所有方法，我们尝试了隐藏状态维度 d &#x3D; {50， 100， 150， 200}。对于竞争方法，我们使用了与他们各自论文中报告的相同的超参数。对于权重的初始化和优化，我们使用了与 [10] 类似的过程。我们使用 Tensorflow 实现 SAKT，并使用学习率为 0.001 的 ADAM [5] 优化器。我们对 ASSISTChall 数据集使用了 256 的批次大小，对其他数据集使用了 128 的批次大小。对于记录数量较多的数据集，例如 ASSISTChall 和 ASSIST2015，我们使用的丢失率为 0.2，而对于其余数据集，我们使用的丢失率为 0.2。我们设置序列的最大长度 n 与每个学生的平均锻炼标签大致成正比。对于 ASSISTChall 和 STATICS 数据集，我们使用 n &#x3D; 500，对于ASSIST2009 n &#x3D; 100 和 50 ，对于合成数据集和 ASSIST2015 数据集 n 设置为 50。</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1728029584075.png"
+                       alt="1728029584075" style="zoom:80%;" 
+                >
+
+<hr>
+<p><strong>消融实验</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/2024/10/04/SAKT-notes/1728030331307.png"
+                       alt="1728030331307" style="zoom: 80%;" 
+                >
+
+<ul>
+<li>RC 对模型的性能没有太大贡献。事实上，删除残差连接可提供比 ASSIST2015 数据集的默认值更好的性能。</li>
+<li>无 Dropout：Dropout 在神经网络中用于正则化模型，以便它可以更好地泛化。与模型的参数数量相比，模型的过拟合对于记录数较少的数据集更有效。因此，dropout 的角色对 ASSIST2009 数据集和 STATICS 数据集更有效。</li>
+<li>单头：我们尝试了仅使用 1 个 head 的变体，而不是默认架构中那样使用 5 个 head。多个 head 有助于捕获不同子空间中的注意力权重。使用单个磁头会持续降低 SAKT 在所有数据集上的性能。</li>
+<li>无块：当不使用自我注意力块时，下一个练习的预测仅取决于最后一次交互。可以看出，没有 attention block 的性能明显差于默认架构。</li>
+<li>2 个区组：增加自我注意区组的数量会增加模型的参数数量。然而，在我们的例子中，这种参数的增加并没有被证明对提高性能有用。之所以是预测学生在练习中表现的一个重要方面，取决于他在过去相关练习中的表现。添加另一个自我注意块会使模型更加复杂。</li>
+</ul>
+<h2 id="Conclusion-and-Future-work"><a href="#Conclusion-and-Future-work" class="headerlink" title="Conclusion and Future work"></a>Conclusion and Future work</h2><p>在这项工作中，我们提出了一种基于自我注意力的知识追踪模型 SAKT。它对学生的交互历史进行建模（不使用任何 RNN），并通过考虑他过去交互中的相关练习来预测他在下一个练习中的表现。对各种真实数据集的广泛实验表明，我们的模型可以胜过最先进的方法，并且比基于 RNN 的方法快一个数量级。</p>
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">sakt</span>(nn.Module):  <span class="comment"># 定义一个名为sakt的类，继承自PyTorch的nn.Module模块</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, ex_total, seq_len, dim, heads, dout</span>):</span><br><span class="line">        <span class="built_in">super</span>(sakt, <span class="variable language_">self</span>).__init__()  <span class="comment"># 调用父类的构造函数</span></span><br><span class="line">        <span class="variable language_">self</span>.seq_len = seq_len  <span class="comment"># 序列长度</span></span><br><span class="line">        <span class="variable language_">self</span>.dim = dim  <span class="comment"># 嵌入向量的维度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 交互嵌入层：将输入数据转换为嵌入向量</span></span><br><span class="line">        <span class="variable language_">self</span>.embd_in = nn.Embedding(<span class="number">2</span> * ex_total + <span class="number">1</span>, embedding_dim=dim)</span><br><span class="line">        <span class="comment"># 练习嵌入层：将输入数据转换为嵌入向量</span></span><br><span class="line">        <span class="variable language_">self</span>.embd_ex = nn.Embedding(ex_total + <span class="number">1</span>, embedding_dim=dim)</span><br><span class="line">        <span class="comment"># 位置嵌入层：为序列中的 每个位置生成一个嵌入向量</span></span><br><span class="line">        <span class="variable language_">self</span>.embd_pos = nn.Embedding(seq_len, embedding_dim=dim)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 线性投影层：对嵌入向量进行线性变换，这里有三个线性层，从dim维映射到dim维，参数可以变换</span></span><br><span class="line">        <span class="variable language_">self</span>.linear = nn.ModuleList([nn.Linear(in_features=dim, out_features=dim) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)])</span><br><span class="line">        <span class="comment"># 多头注意力机制：捕捉序列中的依赖关系</span></span><br><span class="line">        <span class="variable language_">self</span>.attn = nn.MultiheadAttention(embed_dim=dim, num_heads=heads, dropout=dout)</span><br><span class="line">        <span class="comment"># 前馈神经网络：进一步处理注意力输出</span></span><br><span class="line">        <span class="variable language_">self</span>.ffn = nn.ModuleList([nn.Linear(in_features=dim, out_features=dim, bias=<span class="literal">True</span>) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 输出层：将最终的输出转换为预测值</span></span><br><span class="line">        <span class="variable language_">self</span>.linear_out = nn.Linear(in_features=dim, out_features=<span class="number">1</span>, bias=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 层归一化：对输出进行归一化处理，帮助神经网络更好地训练</span></span><br><span class="line">        <span class="variable language_">self</span>.layer_norm1 = nn.LayerNorm(dim)</span><br><span class="line">        <span class="variable language_">self</span>.layer_norm2 = nn.LayerNorm(dim)</span><br><span class="line">        <span class="comment"># Dropout层：随机丢弃一些神经元，防止过拟合</span></span><br><span class="line">        <span class="variable language_">self</span>.drop = nn.Dropout(dout)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, input_in, input_ex</span>):</span><br><span class="line">        <span class="comment"># 位置嵌入：为序列中的每个位置生成一个嵌入向量</span></span><br><span class="line">        pos_in = <span class="variable language_">self</span>.embd_pos(torch.arange(<span class="variable language_">self</span>.seq_len).unsqueeze(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取交互嵌入输出：将输入数据转换为嵌入向量并加上位置嵌入</span></span><br><span class="line">        out_in = <span class="variable language_">self</span>.embd_in(input_in)</span><br><span class="line">        out_in = out_in + pos_in</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 分离交互嵌入：将其分为v和k（需要验证是否已分离）</span></span><br><span class="line">        value_in = out_in</span><br><span class="line">        key_in = out_in</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取练习嵌入输出：将输入数据转换为嵌入向量</span></span><br><span class="line">        query_ex = <span class="variable language_">self</span>.embd_ex(input_ex)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 对所有嵌入进行线性投影：将嵌入向量转换为相同的维度</span></span><br><span class="line">        value_in = <span class="variable language_">self</span>.linear[<span class="number">0</span>](value_in).permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">        key_in = <span class="variable language_">self</span>.linear[<span class="number">1</span>](key_in).permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">        query_ex = <span class="variable language_">self</span>.linear[<span class="number">2</span>](query_ex).permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 通过多头注意力层：计算注意力权重并更新查询向量</span></span><br><span class="line">        atn_out, _ = <span class="variable language_">self</span>.attn(query_ex, key_in, value_in, attn_mask=torch.from_numpy(np.triu(np.ones((<span class="variable language_">self</span>.seq_len, <span class="variable language_">self</span>.seq_len)), k=<span class="number">1</span>).astype(<span class="string">&#x27;bool&#x27;</span>)))</span><br><span class="line">        atn_out = query_ex + atn_out  <span class="comment"># 残差连接：将原始查询向量与注意力输出相加</span></span><br><span class="line">        atn_out = <span class="variable language_">self</span>.layer_norm1(atn_out)  <span class="comment"># 层归一化：对注意力输出进行归一化处理</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 调整批次维度的顺序：将批次放在第一个维度上</span></span><br><span class="line">        atn_out = atn_out.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 前馈神经网络：对注意力输出进行进一步处理</span></span><br><span class="line">        ffn_out = <span class="variable language_">self</span>.drop(<span class="variable language_">self</span>.ffn[<span class="number">1</span>](nn.ReLU()(<span class="variable language_">self</span>.ffn[<span class="number">0</span>](atn_out))))</span><br><span class="line">        ffn_out = <span class="variable language_">self</span>.layer_norm2(ffn_out + atn_out)  <span class="comment"># 残差连接和层归一化</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 输出层：将最终的输出转换为预测值（介于0和1之间）</span></span><br><span class="line">        ffn_out = torch.sigmoid(<span class="variable language_">self</span>.linear_out(ffn_out))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ffn_out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">          </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randomdata</span>():</span><br><span class="line">    input_in = torch.randint( <span class="number">0</span> , <span class="number">49</span> ,(<span class="number">64</span> , <span class="number">12</span>) )</span><br><span class="line">    <span class="keyword">return</span> input_in, input_in</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Testing the model </span></span><br><span class="line">E =  <span class="number">50</span> <span class="comment"># total unique excercises</span></span><br><span class="line">d = <span class="number">128</span> <span class="comment"># latent dimension</span></span><br><span class="line">n = <span class="number">12</span>  <span class="comment"># sequence length</span></span><br><span class="line"></span><br><span class="line">d1,d2 = randomdata()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( <span class="string">&#x27;Input shape&#x27;</span>,d1.shape)</span><br><span class="line">model = sakt( ex_total= E , seq_len= n , dim= d , heads= <span class="number">8</span>, dout= <span class="number">0.2</span> )</span><br><span class="line">out = model( d1, d2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Output shape&#x27;</span>, out.shape)</span><br><span class="line"></span><br><span class="line">       </span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> SAKT-note</li>
+        <li><strong>Author:</strong> Chiyomi</li>
+        <li><strong>Created at
+                :</strong> 2024-10-04 09:17:18</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2024-10-04 16:35:46
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2024/10/04/SAKT-notes/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/readingnotes/">#readingnotes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/2024/09/20/KT-notes920/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">论文阅读笔记920</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          lang: 'zh-CN',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+          recaptchaV3Key: "wasd",
+          
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">SAKT-note</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proposed-method"><span class="nav-text">Proposed method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experience-settings"><span class="nav-text">Experience settings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-and-Future-work"><span class="nav-text">Conclusion and Future work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-text">Source Code</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Chiyomi</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        7 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

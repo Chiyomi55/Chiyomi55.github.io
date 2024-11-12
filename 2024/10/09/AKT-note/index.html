@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:published_time" content="2024-10-09T06:59:28.000Z">
-<meta property="article:modified_time" content="2024-10-11T03:32:38.190Z">
+<meta property="article:modified_time" content="2024-10-11T12:08:34.373Z">
 <meta property="article:author" content="Chiyomi">
 <meta property="article:tag" content="readingnotes">
 <meta name="twitter:card" content="summary">
@@ -147,8 +147,8 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-10-11 11:32:38'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Memoryβ</span></a><a class="nav-page-title" href="/"><span class="site-name">AKT-note</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">AKT-note</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-10-09T06:59:28.000Z" title="Created 2024-10-09 14:59:28">2024-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-10-11T03:32:38.190Z" title="Updated 2024-10-11 11:32:38">2024-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
+  postUpdate: '2024-10-11 20:08:34'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Memoryβ</span></a><a class="nav-page-title" href="/"><span class="site-name">AKT-note</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">AKT-note</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-10-09T06:59:28.000Z" title="Created 2024-10-09 14:59:28">2024-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-10-11T12:08:34.373Z" title="Updated 2024-10-11 20:08:34">2024-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
 <li><strong>论文标题</strong>：Context-Aware Attentive Knowledge Tracing</li>
 <li><strong>作者与发表日期</strong>： Ghosh, Aritra and Heffernan, Neil and Lan, Andrew S. </li>
 <li><strong>期刊或会议名称</strong>：KDD ‘20: The 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining Virtual Event CA USA July 6 - 10, 2020 </li>
@@ -172,9 +172,8 @@
 <li>受认知科学关于遗忘机制的发现的启发，我们提出了一种<strong>新的单调注意力机制</strong>，它使用<strong>指数衰减曲线</strong>来降低遥远过去问题的重要性。我们还开发了一个上<strong>下文感知度量</strong>来描述学习者过去回答的问题之间的时间间隔。</li>
 <li>利用 <strong>Rasch 模型</strong>，一种简单且可解释的 IRT 模型，我们使用一系列基于 Rasch 模型的嵌入来捕捉问题之间的个体差异，而无需引入过多的模型参数。</li>
 </ul>
-<p><em>我们在几个基准真实世界的教育数据集上进行了一系列实验，将 AKT 与最先进的 KT 方法进行比较。我们的结果表明，AKT（有时显着）在预测未来学习者的表现方面优于其他 KT 方法。此外，我们对每个关键的 AKT 模型组件进行了消融研究，以证明它们的价值。我们还进行了几个案例研究，以表明 AKT 表现出<strong>出色的可解释性</strong>，并且具有<strong>自动反馈和练习题推荐的潜力</strong>，这两者都是个性化学习的关键要求。</em></p>
 <hr>
-<h1 id="Problem-Setup"><a href="#Problem-Setup" class="headerlink" title="Problem Setup"></a>Problem Setup</h1><p>每个学习者的表现记录都包含每个离散时间步长的一系列问题和回答。对于时间步 t 的学习者 i，我们表示他们回答的问题、这个问题涵盖的概念以及他们以元组形式给出的分级响应的组合<em><strong>（qit ， cti ， rti ）</strong></em>，其中 qit ∈ N+ 是<strong>问题索引</strong>，cti ∈ N+ 是<strong>概念索引</strong>，rti ∈ {0， 1} 是回答。在此表示法下，（qit ， cti ， 1） 表示学习者 i 在时间 t 正确回答了概念 cti 上的问题 qit。此设置与之前的一些深度知识跟踪工作不同，这些工作经常忽略问题索引并将学习者的表现总结为 （cti ， rti ）。做出这个选择是为了避免过度参数化；在以下讨论中，我们省略了上标 i，因为我们讨论了如何预测<strong>单个学习者</strong>的未来表现。鉴于他们过去到时间 t − 1 的历史为 {（q1， c1， r1）， . . ， （qt −1， ct −1， rt −1）}，我们的目标是预测他们在当前时间步 t 对概念 ct 上的问题 qt 的回答 rt。</p>
+<h1 id="Problem-Setup"><a href="#Problem-Setup" class="headerlink" title="Problem Setup"></a>Problem Setup</h1><p>每个学习者的表现记录都包含每个离散时间步长的一系列问题和回答。对于时间步 t 的学习者 i，我们表示他们回答的问题、这个问题涵盖的概念以及他们以元组形式给出的分级响应的组合<em><strong>（qit ， cti ， rti ）</strong></em>，其中 qit ∈ N+ 是<strong>问题索引</strong>，cti ∈ N+ 是<strong>概念索引</strong>，rti ∈ {0， 1} 是回答。在此表示法下，（qit ， cti ， 1） 表示学习者 i 在时间 t 正确回答了概念 cti 上的问题 qit。此设置与之前的一些深度知识跟踪工作不同，这些工作经常忽略问题索引并将学习者的表现总结为 （cti ， rti ）。做出这个选择是<strong>为了避免过度参数化</strong>；在以下讨论中，我们省略了上标 i，因为我们讨论了如何预测<strong>单个学习者</strong>的未来表现。鉴于他们过去到时间 t − 1 的历史为 {（q1， c1， r1）， . . ， （qt −1， ct −1， rt −1）}，我们的目标是预测他们在当前时间步 t 对概念 ct 上的问题 qt 的回答 rt。</p>
 <hr>
 <p><strong>问题和回答的嵌入表达</strong></p>
 <p>我们使用实值嵌入向量xt ∈ RD和yt ∈ RD来分别表示<strong>每个问题</strong>和<strong>每个问题-响应对</strong>（qt、rt）。</p>
@@ -206,7 +205,7 @@
 <img src="/2024/10/09/AKT-note/1728469216072.png"  alt="1728469216072" style="zoom:67%;" />
 
 <blockquote>
-<p><em>选择使用上下文感知嵌入而不是原始嵌入反映了我们的第一种直觉：学习者在回答问题时理解和学习的方式取决于学习者。这些修改后的表示反映了每个学习者对问题的实际理解以及他们根据个人回答历史实际获得的知识。这种模型选择的动机是出于直觉，即对于过去反应序列不同的两个学习者，他们理解同一问题的方式和他们从练习中获得的知识可能会有所不同。</em></p>
+<p><em>选择使用上下文感知嵌入而不是原始嵌入反映了我们的第一种直觉：学习者在回答问题时理解和学习的方式取决于学习者。这些修改后的表示反映了每个学习者对问题的实际理解以及他们根据个人回答历史实际获得的知识。这种模型选择的动机是出于直觉，<strong>即对于过去反应序列不同的两个学习者，他们理解同一问题的方式和他们从练习中获得的知识可能会有所不同。</strong></em></p>
 </blockquote>
 <p>知识检索器将<strong>上下文感知</strong>问题<strong>和问题-响应对嵌入</strong> ˆx1：t 和 yˆ1：t −1 作为输入，并输出针对当前问题的检索到的<strong>知识状态 ht</strong>。我们注意到，在 AKT 中，学习者的当前知识状态<strong>也是上下文感知</strong>的，因为它取决于他们正在回答的当前问题 。知识检索器只能使用有关过去问题的信息、学习者对这些问题的回答以及当前问题的表示形式，而不能使用学习者对当前问题的回答，即 ht &#x3D; fkr（ˆx1， . . . ，xˆt ， yˆ1， . . . ，yˆt−1）。响应预测模型使用检索到的知识来预测当前响应。</p>
 <hr>
